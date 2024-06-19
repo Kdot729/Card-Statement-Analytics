@@ -28,14 +28,14 @@ class Extract:
         self.Delete_Output_Files()
 
     def Create_PDF(self):
-        self.PDF_File_Path = "./api/extract_pdf/PDF/statement.pdf"
+        self.PDF_File_Path = "./extract_pdf/PDF/statement.pdf"
 
         with open(self.PDF_File_Path, "wb") as file:
             file.write(base64.b64decode(self.PDF_URI))
 
     #Note Generates the file path for the zipped file
     def Create_Zipped_File_path(self):
-        Folder_Path = f"./api/extract_pdf/zip/{Zipped_Name}"
+        Folder_Path = f"./extract_pdf/zip/{Zipped_Name}"
         os.makedirs(Folder_Path, exist_ok=True)
         self.Zipped_File_Path = f"{Folder_Path}/extracted.zip"
     
@@ -86,7 +86,7 @@ class Extract:
         #Note | means nothing after TD
         #Example of matches are //Document/Sect[2]/Table/TR[8]/TD[2]/P and //Document/Sect[2]/Table/TR[2]/TD/P
         Regex_Condtion = r'\S+Table\/TR\[\d+\]\/TD(\[\d+\]|)\/P'
-        self.Text_Array = []
+        self._Text_Array = []
 
         for element in self.data["elements"]:
             if re.search(Regex_Condtion, element["Path"]):
@@ -101,3 +101,7 @@ class Extract:
         #Note Delete zipped file
         if os.path.isfile(self.Zipped_File_Path):
             os.remove(self.Zipped_File_Path)
+
+    @property
+    def Text_Array(self):
+        return self._Text_Array
