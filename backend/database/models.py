@@ -8,4 +8,4 @@ class Analytics(URI):
     Min: float
     Max: float
     Avg: float
-    Visit: int
+    Occurrence: int
