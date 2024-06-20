@@ -16,26 +16,38 @@ load_dotenv()
 # logging.basicConfig(level=logging.INFO)
 
 Zipped_Name = "ExtractTextInfoFromPDF"
+PDF_Directory = "./extract_pdf/PDF"
+Zip_Directory = "./extract_pdf/zip"
 
 class Extract:
 
     def __init__(self, PDF_URI):    
         self.PDF_URI = PDF_URI
+
+        self.Create_Directories()
         self.Create_PDF()
         self.Create_Zipped_File_path()
         self.Convert_PDF_to_JSON()
         self.Extract_Data_from_PDF()
         self.Delete_Output_Files()
 
+    def Create_Directories(self):
+
+        Directories = [PDF_Directory, Zip_Directory]
+
+        for Directory in Directories:
+            if not os.path.exists(Directory):
+                os.makedirs(Directory)
+                
     def Create_PDF(self):
-        self.PDF_File_Path = "./extract_pdf/PDF/statement.pdf"
+        self.PDF_File_Path = f"{PDF_Directory}/statement.pdf"
 
         with open(self.PDF_File_Path, "wb") as file:
             file.write(base64.b64decode(self.PDF_URI))
 
     #Note Generates the file path for the zipped file
     def Create_Zipped_File_path(self):
-        Folder_Path = f"./extract_pdf/zip/{Zipped_Name}"
+        Folder_Path = f"{Zip_Directory}/{Zipped_Name}"
         os.makedirs(Folder_Path, exist_ok=True)
         self.Zipped_File_Path = f"{Folder_Path}/extracted.zip"
     
