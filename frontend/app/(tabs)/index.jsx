@@ -27,7 +27,7 @@ export default function App()
     return  (
             <View>
                 <View>
-                    <Text style={Styles.Header}>Upload file</Text>
+                    <Text style={Styles.Header}>Upload PDF</Text>
                     <File_Upload />
                     <Button title="Select Document" onPress={Upload_File}/>
                 </View>
