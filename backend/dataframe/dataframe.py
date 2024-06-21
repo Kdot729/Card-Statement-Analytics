@@ -13,6 +13,7 @@ class Dataframe():
     Transaction_Column = "Transaction"
     Amount_Column = "Amount"
     Category_Column = "Category"
+    Corporation_Column = "Corporation"
 
     def __init__(self, URI):
         
@@ -23,6 +24,7 @@ class Dataframe():
         self.Create_Dataframe()
         self.Trim_All_Columns()
         self.Removing_Character(self.Amount_Column)
+        self.Extract_Corporation()
 
     def Create_Dataframe(self):
         Columns = [self.Transaction_Date_Column, self.Post_Date_Column, self.Transaction_Column, self.Amount_Column, self.Category_Column]
@@ -35,3 +37,6 @@ class Dataframe():
 
     def Removing_Character(self, Dataframe_Column, Remove_Character=" ", New_Character=""):
         self.Dataframe[Dataframe_Column] = self.Dataframe[Dataframe_Column].str.replace(Remove_Character, New_Character)
+
+    def Extract_Corporation(self):
+        self.Dataframe[self.Corporation_Column] = self.Dataframe[self.Transaction_Column].str.split(" ").str[0].str.split(".").str[0]
