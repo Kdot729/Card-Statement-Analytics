@@ -16,6 +16,7 @@ class Dataframe():
         self.Extract_Text = Extract(self.URI)
         self.Create_Dataframe()
         self.Trim_All_Columns()
+        self.Removing_Character("Amount")
 
     def Create_Dataframe(self):
         Columns = ["Transaction Date", "Post Date", "Transaction", "Amount", "Category"]
@@ -25,3 +26,6 @@ class Dataframe():
     def Trim_All_Columns(self):
         Trimming_Condition = lambda row: row.strip() if isinstance(row, str) else row
         self.Dataframe = self.Dataframe.apply(Trimming_Condition)
+
+    def Removing_Character(self, Dataframe_Column, Remove_Character=" ", New_Character=""):
+        self.Dataframe[Dataframe_Column] = self.Dataframe[Dataframe_Column].str.replace(Remove_Character, New_Character)
