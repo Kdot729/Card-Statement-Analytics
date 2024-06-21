@@ -8,6 +8,12 @@ panda.set_option('display.max_colwidth', None)
 
 class Dataframe():
 
+    Transaction_Date_Column = "Transaction Date"
+    Post_Date_Column = "Post Date"
+    Transaction_Column = "Transaction"
+    Amount_Column = "Amount"
+    Category_Column = "Category"
+
     def __init__(self, URI):
         
         #Note Removes header, leaving only the uri
@@ -16,10 +22,10 @@ class Dataframe():
         self.Extract_Text = Extract(self.URI)
         self.Create_Dataframe()
         self.Trim_All_Columns()
-        self.Removing_Character("Amount")
+        self.Removing_Character(self.Amount_Column)
 
     def Create_Dataframe(self):
-        Columns = ["Transaction Date", "Post Date", "Transaction", "Amount", "Category"]
+        Columns = [self.Transaction_Date_Column, self.Post_Date_Column, self.Transaction_Column, self.Amount_Column, self.Category_Column]
         Numpy_Array = numpy.reshape(self.Extract_Text.Text_Array, (-1, 5))
         self.Dataframe = panda.DataFrame.from_records(Numpy_Array, columns=Columns)
 
