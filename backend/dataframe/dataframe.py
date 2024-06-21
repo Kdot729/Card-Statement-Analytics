@@ -15,10 +15,13 @@ class Dataframe():
 
         self.Extract_Text = Extract(self.URI)
         self.Create_Dataframe()
-
+        self.Trim_All_Columns()
 
     def Create_Dataframe(self):
         Columns = ["Transaction Date", "Post Date", "Transaction", "Amount", "Category"]
         Numpy_Array = numpy.reshape(self.Extract_Text.Text_Array, (-1, 5))
-        Dataframe = panda.DataFrame.from_records(Numpy_Array, columns=Columns)
-        print(Dataframe)
+        self.Dataframe = panda.DataFrame.from_records(Numpy_Array, columns=Columns)
+
+    def Trim_All_Columns(self):
+        Trimming_Condition = lambda row: row.strip() if isinstance(row, str) else row
+        self.Dataframe = self.Dataframe.apply(Trimming_Condition)
