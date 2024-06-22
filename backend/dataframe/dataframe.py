@@ -29,6 +29,7 @@ class Dataframe():
         self.Removing_Character(self.Amount_Column)
         self.Extract_Corporation()
         self.Extract_Location()
+        self.Create_New_Transaction()
 
     def Create_Dataframe(self):
         Numpy_Array = numpy.reshape(self.Extract_Text.Text_Array, (-1, 5))
@@ -45,3 +46,9 @@ class Dataframe():
 
     def Extract_Location(self):
         self.Dataframe[self.Location_Column] = [re.split(r'\d', index)[-1].strip() for index in self.Dataframe[self.Transaction_Column]]
+
+    def Create_New_Transaction(self):
+
+        #Note Combine the corporation and location if it's category is "Supermarkets" or "Warehouse Clubs"
+        Merge_Corporation_and_Location = lambda row: f"{row[self.Corporation_Column]} {row[self.Location_Column]}" if row[self.Category_Column] in ["Supermarkets", "Warehouse Clubs"] else row[self.Corporation_Column]
+        self.Dataframe[self.Transaction_Column] = self.Dataframe.apply(Merge_Corporation_and_Location, axis=1)
