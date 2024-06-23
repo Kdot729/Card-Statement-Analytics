@@ -30,6 +30,7 @@ class Dataframe():
         self.Extract_Corporation()
         self.Extract_Location()
         self.Create_New_Transaction()
+        self.Change_Values_for_Discover()
 
     def Create_Dataframe(self):
         Numpy_Array = numpy.reshape(self.Extract_Text.Text_Array, (-1, 5))
@@ -52,3 +53,13 @@ class Dataframe():
         #Note Combine the corporation and location if it's category is "Supermarkets" or "Warehouse Clubs"
         Merge_Corporation_and_Location = lambda row: f"{row[self.Corporation_Column]} {row[self.Location_Column]}" if row[self.Category_Column] in ["Supermarkets", "Warehouse Clubs"] else row[self.Corporation_Column]
         self.Dataframe[self.Transaction_Column] = self.Dataframe.apply(Merge_Corporation_and_Location, axis=1)
+
+    def Change_Values_for_Discover(self):
+
+        def Replace_String(Column, New_String):
+
+            #Note ?i means case insensitive. s? means the s is optional
+            self.Dataframe.loc[self.Dataframe[self.Category_Column].str.match(r'(?i)(Payment|Credit)(s?)'), Column] = New_String
+        
+        Replace_String(self.Transaction_Column, "Discover Payment")
+        Replace_String(self.Corporation_Column, "Discover")
