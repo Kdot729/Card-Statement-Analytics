@@ -31,6 +31,7 @@ class Dataframe():
         self.Extract_Location()
         self.Create_New_Transaction()
         self.Change_Values_for_Discover()
+        self.Calculate_Mean()
 
     def Create_Dataframe(self):
         Numpy_Array = numpy.reshape(self.Extract_Text.Text_Array, (-1, 5))
@@ -63,3 +64,14 @@ class Dataframe():
         
         Replace_String(self.Transaction_Column, "Discover Payment")
         Replace_String(self.Corporation_Column, "Discover")
+
+    def Calculate_Mean(self):
+
+        self.Removing_Character(self.Amount_Column, "$", "")
+        self.Dataframe[self.Amount_Column] = self.Dataframe[self.Amount_Column].astype(float) 
+        Transaction_Group = self.Dataframe.groupby(self.Transaction_Column)
+
+        Transaction_Average = Transaction_Group.mean(numeric_only=True)
+        Reset_Index = Transaction_Average.reset_index()
+        self._Avg = Reset_Index.to_dict("records")
+
