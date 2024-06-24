@@ -75,3 +75,6 @@ class Dataframe():
         Reset_Index = Transaction_Average.reset_index()
         self._Avg = Reset_Index.to_dict("records")
 
+    @property
+    def Avg(self):
+        return self._Avg
