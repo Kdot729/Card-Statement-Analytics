@@ -20,8 +20,8 @@ export default function App()
         const URI_Last_Characters = No_Header_URI.substr(No_Header_URI.length - 16);
         const URI_ID = URI_Last_Characters.slice(0,-1)
 
-        const Post_Endpoint = `post/${URI_ID}`
-        await AxiosInstance.post(Post_Endpoint, {URI})
+        await AxiosInstance.post("post/PDF", {URI_ID, URI})
+
     }
 
     return  (
