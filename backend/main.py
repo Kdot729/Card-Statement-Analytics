@@ -20,7 +20,7 @@ async def PDF(request: Request):
     
     Dataframe_Object = Dataframe((await request.json())["URI"])
 
-    Data = {"URI_ID": (await request.json())["URI_ID"], "URI": (await request.json())["URI"], "Avg": Dataframe_Object.Avg}
+    Data = {"URI_ID": (await request.json())["URI_ID"], "URI": Dataframe_Object.URI, "Avg": Dataframe_Object.Avg}
     response = API_Collection.insert_one(Data)
     # print("ID:", response.inserted_id)
     return {"status": 200}
