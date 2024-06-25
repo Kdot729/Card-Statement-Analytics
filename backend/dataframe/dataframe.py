@@ -21,9 +21,9 @@ class Dataframe():
     def __init__(self, URI):
         
         #Note Removes header, leaving only the uri
-        self.URI = URI.split(",")[1:2][0]
+        self._URI = URI.split(",")[1:2][0]
 
-        self.Extract_Text = Extract(self.URI)
+        self.Extract_Text = Extract(self._URI)
         self.Create_Dataframe()
         self.Trim_All_Columns()
         self.Removing_Character(self.Amount_Column)
@@ -78,3 +78,7 @@ class Dataframe():
     @property
     def Avg(self):
         return self._Avg
+    
+    @property
+    def URI(self):
+        return self._URI
