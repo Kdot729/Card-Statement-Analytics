@@ -1,5 +1,6 @@
 from fastapi import FastAPI, APIRouter, Request
 from fastapi.middleware.cors import CORSMiddleware
+from backend.database.serializers import Analytics_Deserializer
 from backend.database.settings import API_Collection
 from backend.dataframe.dataframe import Dataframe
 import json
@@ -14,6 +15,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+@Router.get("/get/PDF")
+async def Get_PDF():
+    Data = API_Collection.find()
+    return Analytics_Deserializer(Data)
 
 @Router.post("/post/PDF")
 async def PDF(request: Request):
