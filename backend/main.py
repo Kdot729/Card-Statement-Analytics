@@ -21,13 +21,20 @@ async def Get_PDF():
     return Analytics_Deserializer(Data)
 
 @Router.post("/post/PDF")
-async def PDF(request: Request):
-    
-    Dataframe_Object = Dataframe((await request.json())["URI"])
+async def Post_PDF(request: Request):
 
-    Data = {"URI_ID": (await request.json())["URI_ID"], "URI": Dataframe_Object.URI, "Avg": Dataframe_Object.Avg}
-    response = API_Collection.insert_one(Data)
-    # print("ID:", response.inserted_id)
+    Data = {"URI_ID": (await request.json())["URI_ID"]}
+    URI = (await request.json())["URI"]
+    
+    if API_Collection.count_documents(Data, limit = 1) == 0:
+
+        Dataframe_Object = Dataframe(URI)
+        Data["Avg"] = Dataframe_Object.Avg
+        response = API_Collection.insert_one(Data)
+        # print("ID:", response.inserted_id)
+    else:
+        pass
+    
     return {"status": 200}
 
 app.include_router(Router)
