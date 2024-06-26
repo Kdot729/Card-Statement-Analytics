@@ -19,6 +19,7 @@ class Dataframe():
     Average_Column = "Avg"
     Min_Column = "Min"
     Max_Column = "Max"
+    Range_Column = "Range"
 
     Columns = [Transaction_Date_Column, Post_Date_Column, Transaction_Column, Amount_Column, Category_Column]
 
@@ -39,6 +40,7 @@ class Dataframe():
         self.Calculate_Mean()
         self.Calculate_Extremas()
         self.Merging_Dataframes()
+        self.Calculate_Range()
 
     def Create_Dataframe(self):
         Numpy_Array = numpy.reshape(self.Extract_Text.Text_Array, (-1, 5))
@@ -95,7 +97,10 @@ class Dataframe():
         Merged_Function = partial(panda.merge, on=self.Transaction_Column, how='outer')
         self.Statistical_Dataframe = reduce(Merged_Function, Dataframe_List)
         self.Statistical_Dataframe.columns = [self.Transaction_Column, self.Average_Column, self.Max_Column, self.Min_Column]
-        
+    
+    def Calculate_Range(self):
+        self.Statistical_Dataframe[self.Range_Column] = self.Statistical_Dataframe[self.Max_Column] - self.Statistical_Dataframe[self.Min_Column]
+
     @property
     def Avg(self):
         return self._Avg
