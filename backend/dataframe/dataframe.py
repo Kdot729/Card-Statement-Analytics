@@ -75,8 +75,8 @@ class Dataframe():
         self.Removing_Character(self.Amount_Column, "$", "")
         self.Dataframe[self.Amount_Column] = self.Dataframe[self.Amount_Column].astype(float) 
 
-        Transaction_Average = self.Transaction_Group.mean(numeric_only=True).reset_index()
-        self._Avg = Transaction_Average.to_dict("records")
+        self.Transaction_Average = self.Transaction_Group.mean(numeric_only=True).reset_index()
+        self._Avg = self.Transaction_Average.to_dict("records")
 
     def Calculate_Extremas(self):
         Grouped_Transaction_Amount = self.Transaction_Group[self.Amount_Column]
