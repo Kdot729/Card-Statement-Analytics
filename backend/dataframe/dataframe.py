@@ -33,6 +33,7 @@ class Dataframe():
         self.Change_Values_for_Discover()
         self.Group_By()
         self.Calculate_Mean()
+        self.Calculate_Extremas()
 
     def Create_Dataframe(self):
         Numpy_Array = numpy.reshape(self.Extract_Text.Text_Array, (-1, 5))
@@ -76,6 +77,12 @@ class Dataframe():
 
         Transaction_Average = self.Transaction_Group.mean(numeric_only=True).reset_index()
         self._Avg = Transaction_Average.to_dict("records")
+
+    def Calculate_Extremas(self):
+        Grouped_Transaction_Amount = self.Transaction_Group[self.Amount_Column]
+
+        self.Min = Grouped_Transaction_Amount.min().reset_index()
+        self.Max = Grouped_Transaction_Amount.max().reset_index()
 
     @property
     def Avg(self):
