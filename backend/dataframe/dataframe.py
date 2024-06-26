@@ -71,9 +71,8 @@ class Dataframe():
         self.Dataframe[self.Amount_Column] = self.Dataframe[self.Amount_Column].astype(float) 
         Transaction_Group = self.Dataframe.groupby(self.Transaction_Column)
 
-        Transaction_Average = Transaction_Group.mean(numeric_only=True)
-        Reset_Index = Transaction_Average.reset_index()
-        self._Avg = Reset_Index.to_dict("records")
+        Transaction_Average = Transaction_Group.mean(numeric_only=True).reset_index()
+        self._Avg = Transaction_Average.to_dict("records")
 
     @property
     def Avg(self):
