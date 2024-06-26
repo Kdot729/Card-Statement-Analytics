@@ -1,3 +1,4 @@
+from functools import partial, reduce
 import pandas as panda, numpy, re
 from backend.extract_pdf.extract import Extract
 
@@ -15,6 +16,9 @@ class Dataframe():
     Category_Column = "Category"
     Corporation_Column = "Corporation"
     Location_Column = "Location"
+    Average_Column = "Avg"
+    Min_Column = "Min"
+    Max_Column = "Max"
 
     Columns = [Transaction_Date_Column, Post_Date_Column, Transaction_Column, Amount_Column, Category_Column]
 
@@ -34,6 +38,7 @@ class Dataframe():
         self.Group_By()
         self.Calculate_Mean()
         self.Calculate_Extremas()
+        self.Merging_Dataframes()
 
     def Create_Dataframe(self):
         Numpy_Array = numpy.reshape(self.Extract_Text.Text_Array, (-1, 5))
@@ -81,9 +86,16 @@ class Dataframe():
     def Calculate_Extremas(self):
         Grouped_Transaction_Amount = self.Transaction_Group[self.Amount_Column]
 
-        self.Min = Grouped_Transaction_Amount.min().reset_index()
         self.Max = Grouped_Transaction_Amount.max().reset_index()
+        self.Min = Grouped_Transaction_Amount.min().reset_index()
 
+    def Merging_Dataframes(self):
+
+        Dataframe_List = [self.Transaction_Average, self.Max, self.Min]
+        Merged_Function = partial(panda.merge, on=self.Transaction_Column, how='outer')
+        self.Statistical_Dataframe = reduce(Merged_Function, Dataframe_List)
+        self.Statistical_Dataframe.columns = [self.Transaction_Column, self.Average_Column, self.Max_Column, self.Min_Column]
+        
     @property
     def Avg(self):
         return self._Avg
