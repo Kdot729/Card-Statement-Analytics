@@ -4,6 +4,7 @@ from backend.database.serializers import Analytics_Deserializer
 from backend.database.settings import API_Collection
 from backend.dataframe.dataframe import Dataframe
 import json
+from backend.extract_pdf.extract import Extract
 
 app = FastAPI()
 Router = APIRouter()
@@ -29,7 +30,8 @@ async def Post_PDF(request: Request):
     
     if API_Collection.count_documents(Data, limit = 1) == 0:
 
-        Dataframe_Object = Dataframe(URI)
+        PDF = Extract(URI_ID, URI)
+        Dataframe_Object = Dataframe(PDF.Text_Array)
         Data["Avg"] = Dataframe_Object.Avg
         response = API_Collection.insert_one(Data)
         # print("ID:", response.inserted_id)
