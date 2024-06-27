@@ -28,7 +28,7 @@ class Extract:
 
         self.Create_Directories()
         self.Create_PDF()
-        self.Create_Zipped_File_path()
+        self.Create_Zipped_File_Path()
         self.Convert_PDF_to_JSON()
         self.Extract_Data_from_PDF()
         # self.Delete_Output_Files()
@@ -51,10 +51,10 @@ class Extract:
                 file.write(base64.b64decode(self.PDF_URI))
 
     #Note Generates the file path for the zipped file
-    def Create_Zipped_File_path(self):
+    def Create_Zipped_File_Path(self):
         Folder_Path = f"{Zip_Directory}/{Zipped_Name}"
         os.makedirs(Folder_Path, exist_ok=True)
-        self.Zipped_File_Path = f"{Folder_Path}/extracted.zip"
+        self.Zipped_File_Path = f"{Folder_Path}/{self.PDF_ID}.zip"
     
     def Convert_PDF_to_JSON(self):
         self.Zipped_File = f"./{Zipped_Name}.zip"
