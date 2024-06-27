@@ -29,7 +29,7 @@ class Extract:
         self.Create_Zipped_File_path()
         self.Convert_PDF_to_JSON()
         self.Extract_Data_from_PDF()
-        self.Delete_Output_Files()
+        # self.Delete_Output_Files()
 
     def Create_Directories(self):
 
