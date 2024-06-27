@@ -21,7 +21,9 @@ Zip_Directory = "./extract_pdf/zip"
 
 class Extract:
 
-    def __init__(self, PDF_URI):    
+    def __init__(self, PDF_ID, PDF_URI):
+        
+        self.PDF_ID = PDF_ID
         self.PDF_URI = PDF_URI
 
         self.Create_Directories()
