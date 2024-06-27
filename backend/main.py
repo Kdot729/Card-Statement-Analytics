@@ -23,7 +23,8 @@ async def Get_PDF():
 @Router.post("/post/PDF")
 async def Post_PDF(request: Request):
 
-    Data = {"URI_ID": (await request.json())["URI_ID"]}
+    URI_ID = (await request.json())["URI_ID"]
+    Data = {"URI_ID": URI_ID}
     URI = (await request.json())["URI"]
     
     if API_Collection.count_documents(Data, limit = 1) == 0:
