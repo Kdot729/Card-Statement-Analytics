@@ -15,9 +15,10 @@ load_dotenv()
 #Note Logger
 # logging.basicConfig(level=logging.INFO)
 
+Extract_PDF_Folder = "extract_pdf"
 Zipped_Name = "ExtractTextInfoFromPDF"
-PDF_Directory = "./extract_pdf/PDF"
-Zip_Directory = "./extract_pdf/zip"
+PDF_Directory = f"./{Extract_PDF_Folder}/PDF"
+Zip_Directory = f"./{Extract_PDF_Folder}/zip"
 
 class Extract:
 
