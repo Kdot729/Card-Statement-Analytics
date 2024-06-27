@@ -30,8 +30,8 @@ async def Post_PDF(request: Request):
     
     if API_Collection.count_documents(Data, limit = 1) == 0:
 
-        PDF = Extract(PDF_ID, PDF)
-        Dataframe_Object = Dataframe(PDF.Text_Array)
+        PDF_Object = Extract(PDF_ID, PDF)
+        Dataframe_Object = Dataframe(PDF_Object.Text_Array)
         Data["Avg"] = Dataframe_Object.Avg
         response = API_Collection.insert_one(Data)
         # print("ID:", response.inserted_id)
