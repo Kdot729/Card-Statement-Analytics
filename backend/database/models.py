@@ -5,6 +5,6 @@ class Transaction_Average(BaseModel):
     Amount: float
 
 class Analytics(BaseModel):
-    URI: str
-    URI_ID: str
+    PDF_ID: str
+    PDF: str
     Avg: list[Transaction_Average]

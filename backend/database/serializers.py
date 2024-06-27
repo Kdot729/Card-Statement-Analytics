@@ -1,6 +1,6 @@
 def Analytics_Serializer(Analytic):
     return {
-            "URI_ID": Analytic["URI_ID"],
+            "PDF_ID": Analytic["PDF_ID"],
             "Avg": Analytic["Avg"]
             }
 

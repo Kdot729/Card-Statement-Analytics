@@ -15,12 +15,12 @@ export default function App()
         const PDF_Document = await DocumentPicker.getDocumentAsync({type: 'application/pdf'})
         Set_Document(PDF_Document)
 
-        const URI = PDF_Document.assets[0].uri
-        const No_Header_URI = URI.split(",")[1]
-        const URI_Last_Characters = No_Header_URI.substr(No_Header_URI.length - 16);
-        const URI_ID = URI_Last_Characters.slice(0,-1)
+        const PDF = PDF_Document.assets[0].uri
+        const No_Header_PDF = PDF.split(",")[1]
+        const PDF_Last_Characters = No_Header_PDF.substr(No_Header_PDF.length - 16);
+        const PDF_ID = PDF_Last_Characters.slice(0,-1)
 
-        await AxiosInstance.post("post/PDF", {URI_ID, URI})
+        await AxiosInstance.post("post/PDF", {PDF_ID, PDF})
 
     }
 

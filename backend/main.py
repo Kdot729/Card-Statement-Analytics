@@ -24,13 +24,13 @@ async def Get_PDF():
 @Router.post("/post/PDF")
 async def Post_PDF(request: Request):
 
-    URI_ID = (await request.json())["URI_ID"]
-    Data = {"URI_ID": URI_ID}
-    URI = (await request.json())["URI"]
+    PDF_ID = (await request.json())["PDF_ID"]
+    Data = {"PDF_ID": PDF_ID}
+    PDF = (await request.json())["PDF"]
     
     if API_Collection.count_documents(Data, limit = 1) == 0:
 
-        PDF = Extract(URI_ID, URI)
+        PDF = Extract(PDF_ID, PDF)
         Dataframe_Object = Dataframe(PDF.Text_Array)
         Data["Avg"] = Dataframe_Object.Avg
         response = API_Collection.insert_one(Data)
