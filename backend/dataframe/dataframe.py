@@ -1,6 +1,5 @@
 from functools import partial, reduce
 import pandas as panda, numpy, re
-from backend.extract_pdf.extract import Extract
 
 panda.set_option('display.max_rows', None)
 panda.set_option('display.max_columns', None)
@@ -23,12 +22,10 @@ class Dataframe():
 
     Columns = [Transaction_Date_Column, Post_Date_Column, Transaction_Column, Amount_Column, Category_Column]
 
-    def __init__(self, URI):
+    def __init__(self, Transactions):
         
-        #Note Removes header, leaving only the uri
-        self.URI = URI.split(",")[1:2][0]
+        self.Transactions = Transactions
 
-        self.Extract_Text = Extract(self.URI)
         self.Create_Dataframe()
         self.Trim_All_Columns()
         self.Removing_Character(self.Amount_Column)
@@ -43,7 +40,7 @@ class Dataframe():
         self.Calculate_Range()
 
     def Create_Dataframe(self):
-        Numpy_Array = numpy.reshape(self.Extract_Text.Text_Array, (-1, 5))
+        Numpy_Array = numpy.reshape(self.Transactions, (-1, 5))
         self.Dataframe = panda.DataFrame.from_records(Numpy_Array, columns=self.Columns)
 
     def Trim_All_Columns(self):
