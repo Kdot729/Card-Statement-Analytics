@@ -22,7 +22,7 @@ Zip_Directory = "./extract_pdf/zip"
 class Extract:
 
     def __init__(self, PDF_ID, PDF_URI):
-        
+
         self.PDF_ID = PDF_ID
         self.PDF_URI = PDF_URI
 
@@ -42,10 +42,13 @@ class Extract:
                 os.makedirs(Directory)
                 
     def Create_PDF(self):
-        self.PDF_File_Path = f"{PDF_Directory}/statement.pdf"
+        self.PDF_File_Path = f"{PDF_Directory}/{self.PDF_ID}.pdf"
 
-        with open(self.PDF_File_Path, "wb") as file:
-            file.write(base64.b64decode(self.PDF_URI))
+        if os.path.isfile(self.PDF_File_Path):
+            pass
+        else:
+            with open(self.PDF_File_Path, "wb") as file:
+                file.write(base64.b64decode(self.PDF_URI))
 
     #Note Generates the file path for the zipped file
     def Create_Zipped_File_path(self):
