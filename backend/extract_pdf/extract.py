@@ -57,41 +57,45 @@ class Extract:
         self.Zipped_File_Path = f"{Folder_Path}/{self.PDF_ID}.zip"
     
     def Convert_PDF_to_JSON(self):
-        self.Zipped_File = f"./{Zipped_Name}.zip"
 
-        file = open(self.PDF_File_Path, 'rb')
-        input_stream = file.read()
-        file.close()
+        if os.path.isfile(self.Zipped_File_Path):
+            pass
+        else:
+            self.Zipped_File = f"./{Zipped_Name}.zip"
 
-        # Initial setup, create credentials instance
-        credentials = ServicePrincipalCredentials(
-            client_id=os.getenv("Adobe_ID"),
-            client_secret=os.getenv("Adobe_Secret")
-        )
+            file = open(self.PDF_File_Path, 'rb')
+            input_stream = file.read()
+            file.close()
 
-        # Creates a PDF Services instance
-        pdf_services = PDFServices(credentials=credentials)
+            # Initial setup, create credentials instance
+            credentials = ServicePrincipalCredentials(
+                client_id=os.getenv("Adobe_ID"),
+                client_secret=os.getenv("Adobe_Secret")
+            )
 
-        # Creates an asset(s) from source file(s) and upload
-        input_asset = pdf_services.upload(input_stream=input_stream, mime_type=PDFServicesMediaType.PDF)
+            # Creates a PDF Services instance
+            pdf_services = PDFServices(credentials=credentials)
 
-        # Create parameters for the job
-        extract_pdf_params = ExtractPDFParams(elements_to_extract=[ExtractElementType.TEXT])
+            # Creates an asset(s) from source file(s) and upload
+            input_asset = pdf_services.upload(input_stream=input_stream, mime_type=PDFServicesMediaType.PDF)
 
-        # Creates a new job instance
-        extract_pdf_job = ExtractPDFJob(input_asset=input_asset, extract_pdf_params=extract_pdf_params)
+            # Create parameters for the job
+            extract_pdf_params = ExtractPDFParams(elements_to_extract=[ExtractElementType.TEXT])
 
-        # Submit the job and gets the job result
-        location = pdf_services.submit(extract_pdf_job)
-        pdf_services_response = pdf_services.get_job_result(location, ExtractPDFResult)
+            # Creates a new job instance
+            extract_pdf_job = ExtractPDFJob(input_asset=input_asset, extract_pdf_params=extract_pdf_params)
 
-        # Get content from the resulting asset(s)
-        result_asset: CloudAsset = pdf_services_response.get_result().get_resource()
-        stream_asset: StreamAsset = pdf_services.get_content(result_asset)
+            # Submit the job and gets the job result
+            location = pdf_services.submit(extract_pdf_job)
+            pdf_services_response = pdf_services.get_job_result(location, ExtractPDFResult)
 
-        # Creates an output stream and copy stream asset's content to it
-        with open(self.Zipped_File_Path, "wb") as file:
-            file.write(stream_asset.get_input_stream())
+            # Get content from the resulting asset(s)
+            result_asset: CloudAsset = pdf_services_response.get_result().get_resource()
+            stream_asset: StreamAsset = pdf_services.get_content(result_asset)
+
+            # Creates an output stream and copy stream asset's content to it
+            with open(self.Zipped_File_Path, "wb") as file:
+                file.write(stream_asset.get_input_stream())
 
         archive = ZipFile(self.Zipped_File_Path, 'r')
         jsonentry = archive.open('structuredData.json')
