@@ -115,6 +115,8 @@ class Extract:
         for element in self.data["elements"]:
             if re.search(Regex_Condtion, element["Path"]):
                 self.Text_Array.append(element["Text"])
+            elif re.search(r'Sect\/Title', element["Path"]):
+                self._Activity_Period: str = element["Text"].split(":")[1].strip()
 
     def Delete_Output_Files(self):
 
