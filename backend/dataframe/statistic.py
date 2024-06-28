@@ -9,6 +9,8 @@ class Statistic(Transaction):
     Min_Column = "Min"
     Max_Column = "Max"
     Range_Column = "Range"
+    Occurrence_Column = "Occurrence"
+
 
     def __init__(self, Transaction_Dataframe):
         
@@ -17,8 +19,10 @@ class Statistic(Transaction):
         self.Transaction_Group: DataFrameGroupBy = Transaction.Group_By(self, Transaction.Transaction_Column)
         self.Calculate_Mean()
         self.Calculate_Extremas()
+        self.Calculate_Occurrence()
         self.Merging_Dataframes()
         self.Calculate_Range()
+        # print(self.Statistic_Dataframe)
         
     def Calculate_Mean(self) -> None:
 
@@ -40,6 +44,9 @@ class Statistic(Transaction):
     
     def Calculate_Range(self) -> None:
         self.Statistic_Dataframe[self.Range_Column] = self.Statistic_Dataframe[self.Max_Column] - self.Statistic_Dataframe[self.Min_Column]
+
+    def Calculate_Occurrence(self) -> None:
+        self.Occurence = self.Dataframe[Transaction.Transaction_Column].value_counts().reset_index()
 
     @property
     def Mean(self):
