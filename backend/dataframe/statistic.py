@@ -39,8 +39,9 @@ class Statistic(Transaction):
         self.Min = Grouped_Transaction_Amount.min().reset_index()
 
     def Merging_Dataframes(self) -> None:
-        self.Statistic_Dataframe: panda.DataFrame = Transaction.Merging_Dataframes(self, Transaction.Transaction_Column, [self.Transaction_Mean, self.Max, self.Min])
-        self.Statistic_Dataframe.columns = [Transaction.Transaction_Column, self.Mean_Column, self.Max_Column, self.Min_Column]
+        Dataframe_List = [self.Transaction_Mean, self.Max, self.Min, self.Occurence]
+        self.Statistic_Dataframe: panda.DataFrame = Transaction.Merging_Dataframes(self, Transaction.Transaction_Column, Dataframe_List)
+        self.Statistic_Dataframe.columns = [Transaction.Transaction_Column, self.Mean_Column, self.Max_Column, self.Min_Column, self.Occurrence_Column]
     
     def Calculate_Range(self) -> None:
         self.Statistic_Dataframe[self.Range_Column] = self.Statistic_Dataframe[self.Max_Column] - self.Statistic_Dataframe[self.Min_Column]
