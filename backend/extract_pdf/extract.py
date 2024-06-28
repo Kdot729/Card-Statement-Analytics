@@ -131,3 +131,7 @@ class Extract:
     @property
     def Text_Array(self):
         return self._Text_Array
+    
+    @property
+    def Activity_Period(self):
+        return self._Activity_Period
