@@ -1,7 +1,7 @@
 def Analytics_Serializer(Analytic):
     return {
             "PDF_ID": Analytic["PDF_ID"],
-            "Avg": Analytic["Avg"]
+            "Mean": Analytic["Mean"]
             }
 
 def Analytics_Deserializer(Analytics):
