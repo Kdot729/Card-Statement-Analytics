@@ -6,5 +6,4 @@ class Transaction_Average(BaseModel):
 
 class Analytics(BaseModel):
     PDF_ID: str
-    PDF: str
     Mean: list[Transaction_Average]
