@@ -23,6 +23,11 @@ async def Get_All_PDF():
     Data = API_Collection.find()
     return Analytics_Deserializer(Data)
 
+@Router.get("/get/PDF/{id}")
+async def Get_PDF(id: str):
+    Data = API_Collection.find_one({"PDF_ID": id})
+    return Analytics_Deserializer(Data)
+
 @Router.post("/post/PDF")
 async def Post_PDF(request: Request):
 
