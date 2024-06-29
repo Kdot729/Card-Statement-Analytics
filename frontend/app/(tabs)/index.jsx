@@ -8,19 +8,19 @@ import { AxiosInstance } from "../../scripts/axios_interceptor";
 export default function App() 
 {
 
-    const [Document, Set_Document] = useState("")
+    const [PDF_ID, Set_PDF_ID] = useState("")
 
     const Upload_File = async () => 
     {
         const PDF_Document = await DocumentPicker.getDocumentAsync({type: 'application/pdf'})
-        Set_Document(PDF_Document)
 
         const PDF = PDF_Document.assets[0].uri
         const No_Header_PDF = PDF.split(",")[1]
         const PDF_Last_Characters = No_Header_PDF.substr(No_Header_PDF.length - 16);
-        const PDF_ID = PDF_Last_Characters.slice(0,-1)
+        const ID = PDF_Last_Characters.slice(0,-1)
 
-        await AxiosInstance.post("post/PDF", {PDF_ID, PDF})
+        Set_PDF_ID(ID)
+        await AxiosInstance.post("post/PDF", {PDF_ID: ID, PDF})
 
     }
 
