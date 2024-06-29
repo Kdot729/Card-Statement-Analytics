@@ -6,4 +6,11 @@ def Analytics_Serializer(Analytic):
             }
 
 def Analytics_Deserializer(Analytics):
-    return  [Analytics_Serializer(Analytic) for Analytic in Analytics]
+
+    #Note Executed during Get_All_PDF
+    try:
+        return [Analytics_Serializer(Analytic) for Analytic in Analytics]
+    
+    #Note Executed during Get_PDF
+    except:
+        return Analytics_Serializer(Analytics)
