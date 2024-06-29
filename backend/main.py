@@ -36,7 +36,8 @@ async def Post_PDF(request: Request):
         Statistic_Object = Statistic(Transaction_Object.Dataframe)
 
         Data["Activity_Period"] = PDF_Object.Activity_Period
-        Data["Mean"] = Statistic_Object.Mean
+        Data["Statistic"] = Statistic_Object.Statistic_Model
+
         response = API_Collection.insert_one(Data)
         # print("ID:", response.inserted_id)
 
