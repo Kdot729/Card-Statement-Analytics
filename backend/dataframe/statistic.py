@@ -22,7 +22,8 @@ class Statistic(Transaction):
         self.Calculate_Occurrence()
         self.Merging_Dataframes()
         self.Calculate_Range()
-        # print(self.Statistic_Dataframe)
+
+        self._Statistic_Model = self.Statistic_Dataframe.to_dict(orient="records")
         
     def Calculate_Mean(self) -> None:
 
@@ -49,6 +50,10 @@ class Statistic(Transaction):
     def Calculate_Occurrence(self) -> None:
         self.Occurence = self.Dataframe[Transaction.Transaction_Column].value_counts().reset_index()
 
+    @property
+    def Statistic_Model(self):
+        return self._Statistic_Model
+    
     @property
     def Mean(self):
         return self._Mean
