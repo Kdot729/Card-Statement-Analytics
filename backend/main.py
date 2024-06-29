@@ -17,8 +17,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 @Router.get("/get/PDF")
-async def Get_PDF():
+async def Get_All_PDF():
     Data = API_Collection.find()
     return Analytics_Deserializer(Data)
 
