@@ -7,4 +7,13 @@ class Transaction_Average(BaseModel):
 class Analytics(BaseModel):
     PDF_ID: str
     Activity_Period: str
-    Mean: list[Transaction_Average]
+    # Mean: list[Transaction_Average]
+    Statistic: list[Statistic]
+
+class Statistic:
+    Transaction: str
+    Mean: float
+    Max: float
+    Min: float
+    Occurrence: int
+    Range: float
