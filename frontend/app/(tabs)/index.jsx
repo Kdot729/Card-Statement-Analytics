@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import * as DocumentPicker from 'expo-document-picker';
 import File_Upload from '../components/file_upload';
 import { AxiosInstance } from "../../scripts/axios_interceptor";
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const Query_Client = new QueryClient();
 
 export default function App() 
 {
@@ -25,13 +28,13 @@ export default function App()
     }
 
     return  (
-            <View>
+            <QueryClientProvider client={Query_Client}>
                 <View>
                     <Text style={Styles.Header}>Upload PDF</Text>
                     <File_Upload />
                     <Button title="Select Document" onPress={Upload_File}/>
                 </View>
-            </View>
+            </QueryClientProvider>
             )
 }
 
