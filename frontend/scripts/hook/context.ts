@@ -1,5 +1,5 @@
-import { createContext, useContext } from 'react';
+import { Context, createContext, useContext } from 'react';
 
-export const Create_Context = createContext("")
+export const Create_Context: Context<string> = createContext("")
 
-export const Use_Context = (PDF_ID) => {return useContext(PDF_ID)}
+export const Use_Context = (PDF_ID: Context<string>) => {return useContext(PDF_ID)}
