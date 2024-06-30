@@ -1,8 +1,10 @@
 import Svg, { Path } from "react-native-svg"
 import {View, Text, Button, StyleSheet} from 'react-native';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import * as DocumentPicker from 'expo-document-picker';
 import { AxiosInstance } from "../../scripts/axios_interceptor";
+import { Table } from "./table";
+import { Create_Context } from "../../scripts/hook/context";
 
 const Upload = (properties) =>
 {
@@ -31,13 +33,15 @@ export const File = () =>
 
     }
 
-    return  (
+    return  PDF_ID ? 
+            <Create_Context.Provider value={PDF_ID}>
+                <Table />
+            </Create_Context.Provider > : 
             <View>
                 <Text style={Styles.Header}>Upload PDF</Text>
                 <Upload />
                 <Button title="Select Document" onPress={Upload_File}/>
             </View>
-            )
 }
 
 const Styles = StyleSheet.create(
