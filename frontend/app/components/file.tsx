@@ -6,6 +6,7 @@ import { AxiosInstance } from "../../scripts/axios_interceptor";
 import { Table } from "./table";
 import { Create_Context } from "../../scripts/hook/context";
 import React from "react";
+import * as FileSystem from 'expo-file-system';
 
 const Upload = (properties) =>
 {
@@ -22,16 +23,20 @@ export const File = () =>
 
     const Upload_File = async () => 
     {
-        const PDF_Document = await DocumentPicker.getDocumentAsync({type: 'application/pdf'})
+        try
+        {
+            const PDF_Document = await DocumentPicker.getDocumentAsync({type: 'application/pdf'})
+            const PDF = PDF_Document.assets[0].uri
+            const Base64_PDF = await FileSystem.readAsStringAsync(PDF, {encoding: FileSystem.EncodingType.Base64})
+            const ID = Base64_PDF.substring(Base64_PDF.length - 16).slice(0,-1)
 
-        const PDF = PDF_Document.assets[0].uri
-        const No_Header_PDF = PDF.split(",")[1]
-        const PDF_Last_Characters = No_Header_PDF.substr(No_Header_PDF.length - 16);
-        const ID = PDF_Last_Characters.slice(0,-1)
-
-        Set_PDF_ID(ID)
-        await AxiosInstance.post("post/PDF", {PDF_ID: ID, PDF})
-
+            Set_PDF_ID(ID)
+            await AxiosInstance.post("post/PDF", {PDF_ID: ID, PDF: Base64_PDF})
+        }
+        catch (error) 
+        {
+            console.log("Error while selecting file: ", error.response.data);
+        }
     }
 
     return  PDF_ID ? 
