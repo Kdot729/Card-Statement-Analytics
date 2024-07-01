@@ -25,9 +25,7 @@ class Extract:
     def __init__(self, PDF_ID, PDF_URI):
 
         self.PDF_ID = PDF_ID
-
-        #Note Removes header, leaving only the uri
-        self.PDF_URI = PDF_URI.split(",")[1:2][0]
+        self.PDF_URI = PDF_URI
 
         self.Create_Directories()
         self.Create_PDF()
