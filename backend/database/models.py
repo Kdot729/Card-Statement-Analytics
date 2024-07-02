@@ -6,9 +6,9 @@ class Analytics(BaseModel):
     Statistic: list[Statistic]
 
 class Statistic:
-    Transaction: str
+    ID: str
     Mean: float
     Max: float
     Min: float
-    Occurrence: int
+    Freq: int
     Range: float
