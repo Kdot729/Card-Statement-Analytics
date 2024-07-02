@@ -30,7 +30,7 @@ class Statistic(Transaction):
         Dataframe.Removing_Character(self, Transaction.Amount_Column, "$", "")
         self._Dataframe[Transaction.Amount_Column] = self._Dataframe[Transaction.Amount_Column].astype(float)
 
-        self.Transaction_Mean = self.Transaction_Group.mean(numeric_only=True).reset_index()
+        self.Transaction_Mean = self.Transaction_Group.mean(numeric_only=True).round(2).reset_index()
         self._Mean = self.Transaction_Mean.to_dict("records")
 
     def Calculate_Extremas(self) -> None:
