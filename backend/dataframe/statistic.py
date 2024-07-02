@@ -9,14 +9,14 @@ class Statistic(Transaction):
     Min_Column = "Min"
     Max_Column = "Max"
     Range_Column = "Range"
-    Occurrence_Column = "Occurrence"
+    Freq_Column = "Freq"
 
 
     def __init__(self, Transaction_Dataframe):
         
         Dataframe.__init__(self, Transaction_Dataframe)
 
-        self.Transaction_Group: DataFrameGroupBy = Transaction.Group_By(self, Transaction.Transaction_Column)
+        self.Transaction_Group: DataFrameGroupBy = Transaction.Group_By(self, Transaction.ID_Column)
         self.Calculate_Mean()
         self.Calculate_Extremas()
         self.Calculate_Occurrence()
@@ -39,14 +39,14 @@ class Statistic(Transaction):
 
     def Merging_Dataframes(self) -> None:
         Dataframe_List = [self.Transaction_Mean, self.Max, self.Min, self.Occurence]
-        self.Statistic_Dataframe: panda.DataFrame = Transaction.Merging_Dataframes(self, Transaction.Transaction_Column, Dataframe_List)
-        self.Statistic_Dataframe.columns = [Transaction.Transaction_Column, self.Mean_Column, self.Max_Column, self.Min_Column, self.Occurrence_Column]
+        self.Statistic_Dataframe: panda.DataFrame = Transaction.Merging_Dataframes(self, Transaction.ID_Column, Dataframe_List)
+        self.Statistic_Dataframe.columns = [Transaction.ID_Column, self.Mean_Column, self.Max_Column, self.Min_Column, self.Freq_Column]
     
     def Calculate_Range(self) -> None:
         self.Statistic_Dataframe[self.Range_Column] = self.Statistic_Dataframe[self.Max_Column] - self.Statistic_Dataframe[self.Min_Column]
 
     def Calculate_Occurrence(self) -> None:
-        self.Occurence = self.Dataframe[Transaction.Transaction_Column].value_counts().reset_index()
+        self.Occurence = self.Dataframe[Transaction.ID_Column].value_counts().reset_index()
 
     @property
     def Statistic_Model(self):
