@@ -29,9 +29,7 @@ class Statistic(Transaction):
 
         Dataframe.Removing_Character(self, Transaction.Amount_Column, "$", "")
         self._Dataframe[Transaction.Amount_Column] = self._Dataframe[Transaction.Amount_Column].astype(float)
-
         self.Transaction_Mean = self.Transaction_Group.mean(numeric_only=True).round(2).reset_index()
-        self._Mean = self.Transaction_Mean.to_dict("records")
 
     def Calculate_Extremas(self) -> None:
         Grouped_Transaction_Amount = self.Transaction_Group[Transaction.Amount_Column]
@@ -53,7 +51,3 @@ class Statistic(Transaction):
     @property
     def Statistic_Model(self):
         return self._Statistic_Model
-    
-    @property
-    def Mean(self):
-        return self._Mean
