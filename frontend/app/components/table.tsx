@@ -16,12 +16,14 @@ export const Table = () =>
 
     const Header = Object.keys(Statistic ? Statistic[0] : {})
 
-    const Table_Header =    <View style={Table_Styles["Header"]}>                 
+    const Table_Header =    <View style={Table_Element("rgb(190, 189, 189)")}>                 
                             {
                                 Header.map((Header: string) =>
                                 {
+                                    const Text_Styles = [Table_Styles["Header_Cell"], Font_Size(15)]
+                                    
                                     return <Table_Row key={Header} 
-                                        Text_Component={<Text style={Table_Styles["Header_Cell"]}>{Header}</Text>} />
+                                        Text_Component={<Text style={Text_Styles}>{Header}</Text>} />
                                 })
                             }
                             </View>
@@ -31,10 +33,12 @@ export const Table = () =>
                             const Row = Object.entries(item).map(([Category, Value]) =>
                                 {
                                     return <Table_Row key={Category}
-                                        Text_Component={<Text style={Table_Styles["Body_Cell"]}>{Value}</Text>} />
+                                        Text_Component={<Text style={Font_Size(11)}>{Value}</Text>} />
                                 })
 
-                            return <View style={Table_Styles["Body"]} key={item["ID"]}>{Row}</View>
+                            const Row_Container_Styles = [Table_Styles["Body"], Table_Element("rgb(228, 228, 228)")]
+
+                            return <View style={Row_Container_Styles} key={item["ID"]}>{Row}</View>
                         }
 
     const Container_Styles = [Table_Styles["Container"], Table_Styles["Center"]]
@@ -55,9 +59,17 @@ const Table_Styles = StyleSheet.create(
     Center: {justifyContent: "center", alignItems: "center"},
     Container: {flex: 1},
     Table: {margin: 3},
-    Header: {flexDirection: "row", backgroundColor: "rgb(190, 189, 189)"},
-    Header_Cell: {color: "rgb(11, 79, 180)", fontWeight: "bold", fontSize: 15},
-    Body: {flexDirection: "row", padding: 5, backgroundColor: "rgb(228, 228, 228)"},
-    Body_Cell: {fontSize: 11},
+    Header_Cell: {color: "rgb(11, 79, 180)", fontWeight: "bold"},
+    Body: {padding: 5},
     Row: {width: "15%", margin: 2}
 })
+
+const Table_Element = (Background_Color) =>
+{
+    return StyleSheet.create({Element: {flexDirection: "row", backgroundColor: Background_Color}})["Element"]
+}
+
+const Font_Size = (Size: number) =>
+{
+    return StyleSheet.create({Font_Size: {fontSize: Size}})["Font_Size"]
+}
