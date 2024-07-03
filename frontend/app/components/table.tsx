@@ -5,7 +5,8 @@ import React from "react";
 
 const Table_Row = ({Text_Component}: {Text_Component: JSX.Element}): JSX.Element =>
 {
-    return <View style={Table_Styles["Row"]}>{Text_Component}</View>
+    const Row_Styles = [Table_Styles["Row"], Table_Styles["Center"]]
+    return <View style={Row_Styles}>{Text_Component}</View>
 }
 
 export const Table = () =>
@@ -36,9 +37,10 @@ export const Table = () =>
                             return <View style={Table_Styles["Body"]} key={item["ID"]}>{Row}</View>
                         }
 
-    
+    const Container_Styles = [Table_Styles["Container"], Table_Styles["Center"]]
+
     return  Statistic && Activity_Period ? 
-            <View style={Table_Styles["Container"]}>
+            <View style={Container_Styles}>
                 <Text>{Activity_Period}</Text>
                 <View style={Table_Styles["Table"]}>
                 <FlatList data={Statistic} ListHeaderComponent={Table_Header} 
@@ -50,11 +52,12 @@ export const Table = () =>
 
 const Table_Styles = StyleSheet.create(
 {
-    Container: {justifyContent: "center", alignItems: "center", flex: 1},
+    Center: {justifyContent: "center", alignItems: "center"},
+    Container: {flex: 1},
     Table: {margin: 3},
     Header: {flexDirection: "row", backgroundColor: "rgb(190, 189, 189)"},
     Header_Cell: {color: "rgb(11, 79, 180)", fontWeight: "bold", fontSize: 15},
     Body: {flexDirection: "row", padding: 5, backgroundColor: "rgb(228, 228, 228)"},
     Body_Cell: {fontSize: 11},
-    Row: {width: "15%", justifyContent: "center", alignItems: "center", margin: 2}
+    Row: {width: "15%", margin: 2}
 })
