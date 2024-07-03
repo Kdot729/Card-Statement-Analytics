@@ -5,7 +5,7 @@ import React from "react";
 
 const Table_Row = ({Text_Component}: {Text_Component: JSX.Element}): JSX.Element =>
 {
-    const Row_Styles = [Table_Styles["Row"], Table_Styles["Center"]]
+    const Row_Styles = [Table_Styles["Row"], Table_Styles["Center"], Margin(2)]
     return <View style={Row_Styles}>{Text_Component}</View>
 }
 
@@ -46,7 +46,7 @@ export const Table = () =>
     return  Statistic && Activity_Period ? 
             <View style={Container_Styles}>
                 <Text>{Activity_Period}</Text>
-                <View style={Table_Styles["Table"]}>
+                <View style={Margin(3)}>
                 <FlatList data={Statistic} ListHeaderComponent={Table_Header} 
                 keyExtractor={(Transaction) => Transaction["ID"]} renderItem={Statistics} />
                 </View>
@@ -58,10 +58,9 @@ const Table_Styles = StyleSheet.create(
 {
     Center: {justifyContent: "center", alignItems: "center"},
     Container: {flex: 1},
-    Table: {margin: 3},
     Header_Cell: {color: "rgb(11, 79, 180)", fontWeight: "bold"},
     Body: {padding: 5},
-    Row: {width: "15%", margin: 2}
+    Row: {width: "15%"}
 })
 
 const Table_Element = (Background_Color) =>
@@ -72,4 +71,9 @@ const Table_Element = (Background_Color) =>
 const Font_Size = (Size: number) =>
 {
     return StyleSheet.create({Font_Size: {fontSize: Size}})["Font_Size"]
+}
+
+const Margin = (Margin: number) =>
+{
+    return StyleSheet.create({Margin: {margin: Margin}})["Margin"]
 }
