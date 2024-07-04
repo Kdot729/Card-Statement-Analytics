@@ -42,10 +42,11 @@ export const Table = () =>
                         }
 
     const Container_Styles = [Table_Styles["Container"], Table_Styles["Center"]]
+    const Header_Styles = [Font_Size(20), Margin(3)]
 
     return  Statistic && Activity_Period ? 
             <View style={Container_Styles}>
-                <Text>{Activity_Period}</Text>
+                <Text style={Header_Styles}>{Activity_Period}</Text>
                 <View style={Margin(3)}>
                 <FlatList data={Statistic} ListHeaderComponent={Table_Header} 
                 keyExtractor={(Transaction) => Transaction["ID"]} renderItem={Statistics} />
