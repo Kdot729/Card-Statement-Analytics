@@ -20,7 +20,7 @@ export const Table = () =>
                             {
                                 Header.map((Header: string) =>
                                 {
-                                    const Text_Styles = [Table_Styles["Header_Cell"], Font_Size(15)]
+                                    const Text_Styles = [Table_Styles["Header_Cell"], Font_Size(17)]
                                     
                                     return <Table_Row key={Header} 
                                         Text_Component={<Text style={Text_Styles}>{Header}</Text>} />
@@ -33,7 +33,7 @@ export const Table = () =>
                             const Row = Object.entries(item).map(([Category, Value]) =>
                                 {
                                     return <Table_Row key={Category}
-                                        Text_Component={<Text style={Font_Size(11)}>{Value}</Text>} />
+                                        Text_Component={<Text style={Font_Size(14)}>{Value}</Text>} />
                                 })
 
                             const Row_Container_Styles = [Table_Styles["Body"], Table_Element("rgb(228, 228, 228)")]
