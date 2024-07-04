@@ -22,6 +22,7 @@ class Statistic(Transaction):
         self.Calculate_Occurrence()
         self.Merging_Dataframes()
         self.Calculate_Range()
+        self.Append_Dollar_Sign()
 
         self._Statistic_Model = self.Statistic_Dataframe.to_dict(orient="records")
         
@@ -47,6 +48,11 @@ class Statistic(Transaction):
 
     def Calculate_Occurrence(self) -> None:
         self.Occurence = self.Dataframe[Transaction.ID_Column].value_counts().reset_index()
+
+    def Append_Dollar_Sign(self):
+
+        Dollar_Columns = [self.Mean_Column, self.Max_Column, self.Min_Column, self.Range_Column]
+        self.Statistic_Dataframe[Dollar_Columns] = '$' + self.Statistic_Dataframe[Dollar_Columns].astype(str)
 
     @property
     def Statistic_Model(self):
