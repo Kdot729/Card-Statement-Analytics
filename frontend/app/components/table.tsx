@@ -15,12 +15,14 @@ export const Table = () =>
     const {Activity_Period, Statistic} = useFetch(PDF_ID)
 
     const Header = Object.keys(Statistic ? Statistic[0] : {})
+    const Date_Header_Font_Size = 20
 
     const Table_Header =    <View style={Table_Element("rgb(190, 189, 189)")}>                 
                             {
                                 Header.map((Header: string) =>
                                 {
-                                    const Text_Styles = [Table_Styles["Header_Cell"], Font_Size(17)]
+                                    const Table_Header_Font_Size = Date_Header_Font_Size - 3
+                                    const Text_Styles = [Table_Styles["Header_Cell"], Font_Size(Table_Header_Font_Size)]
                                     
                                     return <Table_Row key={Header} 
                                         Text_Component={<Text style={Text_Styles}>{Header}</Text>} />
@@ -32,8 +34,10 @@ export const Table = () =>
                         {
                             const Row = Object.entries(item).map(([Category, Value]) =>
                                 {
+                                    const Row_Font_Size = Date_Header_Font_Size - 6
+                                    
                                     return <Table_Row key={Category}
-                                        Text_Component={<Text style={Font_Size(14)}>{Value}</Text>} />
+                                        Text_Component={<Text style={Font_Size(Row_Font_Size)}>{Value}</Text>} />
                                 })
 
                             const Row_Container_Styles = [Table_Styles["Body"], Table_Element("rgb(228, 228, 228)")]
@@ -42,7 +46,7 @@ export const Table = () =>
                         }
 
     const Container_Styles = [Table_Styles["Container"], Table_Styles["Center"]]
-    const Header_Styles = [Font_Size(20), Margin(3)]
+    const Header_Styles = [Font_Size(Date_Header_Font_Size), Margin(3)]
 
     return  Statistic && Activity_Period ? 
             <View style={Container_Styles}>
