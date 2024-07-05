@@ -106,8 +106,9 @@ class Extract:
     def Extract_Data_from_PDF(self):
         #Note \S+ means any nonspace characters
         #Note | means nothing after TD
+        #Note $ marks the end of string. Need the $ to avoid //Document/Sect[2]/Table/TR[5]/TD[3]/P[2]
         #Example of matches are //Document/Sect[2]/Table/TR[8]/TD[2]/P and //Document/Sect[2]/Table/TR[2]/TD/P
-        Regex_Condtion = r'\S+Table\/TR\[\d+\]\/TD(\[\d+\]|)\/P'
+        Regex_Condtion = r'\S+Table\/TR\[\d+\]\/TD(\[\d+\]|)\/P$'
         self._Text_Array = []
 
         for element in self.data["elements"]:
