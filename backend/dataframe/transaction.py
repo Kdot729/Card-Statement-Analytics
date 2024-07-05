@@ -32,8 +32,9 @@ class Transaction(Dataframe):
 
     def Create_New_Transaction(self):
 
-        #Note Combine the corporation and location if it's category is "Supermarkets" or "Warehouse Clubs"
-        Merge_Corporation_and_Location = lambda row: f"{row[self.Corporation_Column]} {row[self.Location_Column]}" if row[self.Category_Column] in ["Supermarkets", "Warehouse Clubs"] else row[self.Corporation_Column]
+        Columns = ["Supermarkets", "Warehouse Clubs", "Gasoline"]
+        #Note Combine the corporation and location if it's category is "Supermarkets", "Warehouse Clubs" or "Gasoline"
+        Merge_Corporation_and_Location = lambda row: f"{row[self.Corporation_Column]} {row[self.Location_Column]}" if row[self.Category_Column] in Columns else row[self.Corporation_Column]
         self._Dataframe[self.ID_Column] = self._Dataframe.apply(Merge_Corporation_and_Location, axis=1)
 
     def Change_Values_for_Discover(self):
