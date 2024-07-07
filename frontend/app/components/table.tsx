@@ -3,10 +3,12 @@ import { useFetch } from '../../scripts/fetch';
 import { Use_Context, Create_Context } from '../../scripts/hook/context';
 import React from "react";
 import { Center } from '../css/main';
+import Arrow from './arrow';
 
 const Table_Row = ({Component}: {Component: JSX.Element}): JSX.Element =>
 {
     const Row_Styles = [Table_Styles["Row"], Center, Margin(2)]
+    
     return <View style={Row_Styles}>{Component}</View>
 }
 
@@ -25,8 +27,12 @@ export const Table = () =>
                                     const Table_Header_Font_Size = Date_Header_Font_Size - 3
                                     const Text_Styles = [Table_Styles["Header_Cell"], Font_Size(Table_Header_Font_Size)]
                                     
-                                    return <Table_Row key={Header} 
-                                        Component={<Text style={Text_Styles}>{Header}</Text>} />
+                                    const Component =   <>
+                                                            <Text style={Text_Styles}>{Header}</Text>
+                                                            <Arrow />
+                                                        </>
+
+                                    return <Table_Row key={Header} Component={Component} />
                                 })
                             }
                             </View>
