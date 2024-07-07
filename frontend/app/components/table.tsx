@@ -2,10 +2,11 @@ import {View, Text, StyleSheet, FlatList} from 'react-native';
 import { useFetch } from '../../scripts/fetch';
 import { Use_Context, Create_Context } from '../../scripts/hook/context';
 import React from "react";
+import { Center } from '../css/main';
 
 const Table_Row = ({Text_Component}: {Text_Component: JSX.Element}): JSX.Element =>
 {
-    const Row_Styles = [Table_Styles["Row"], Table_Styles["Center"], Margin(2)]
+    const Row_Styles = [Table_Styles["Row"], Center, Margin(2)]
     return <View style={Row_Styles}>{Text_Component}</View>
 }
 
@@ -45,7 +46,7 @@ export const Table = () =>
                             return <View style={Row_Container_Styles} key={item["ID"]}>{Row}</View>
                         }
 
-    const Container_Styles = [Table_Styles["Container"], Table_Styles["Center"]]
+    const Container_Styles = [Table_Styles["Container"], Center]
     const Header_Styles = [Font_Size(Date_Header_Font_Size), Margin(3)]
 
     return  Statistic && Activity_Period ? 
@@ -61,11 +62,10 @@ export const Table = () =>
 
 const Table_Styles = StyleSheet.create(
 {
-    Center: {justifyContent: "center", alignItems: "center"},
     Container: {flex: 1},
     Header_Cell: {color: "rgb(11, 79, 180)", fontWeight: "bold"},
     Body: {padding: 5},
-    Row: {width: "15%"}
+    Row: {width: "15%", flexDirection: "row"}
 })
 
 const Table_Element = (Background_Color) =>
