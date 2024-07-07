@@ -25,6 +25,9 @@ class Dataframe():
         Merged_Function: partial[panda.DataFrame] = partial(panda.merge, on=On_Merge_Column, how='outer')
         return reduce(Merged_Function, Dataframe_List)
     
+    def Sort(self, Column: str, Boolean_Sort: bool) -> None:
+        self._Dataframe = self._Dataframe.sort_values(by=[Column], ascending=Boolean_Sort)
+        
     @property
     def Dataframe(self):
         return self._Dataframe
