@@ -11,6 +11,7 @@ class Sort(Statistic):
         Dataframe.__init__(self, Statistic_Dataframe)
         self.Removing_Character()
         self.Convert_to_Numeric()
+        self.Statistic_Dataframe = Statistic.Append_Dollar_Sign(self, self._Dataframe)
 
     def Removing_Character(self) -> None:
         for Column in self.Remove_Dollar_Sign_Columns:
