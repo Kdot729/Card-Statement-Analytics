@@ -15,7 +15,7 @@ const Table_Row = ({Component}: {Component: JSX.Element}): JSX.Element =>
 export const Table = () =>
 {
     const PDF_ID = Use_Context(Create_Context)
-    const {Activity_Period, Statistic} = useFetch(PDF_ID)
+    const {Activity_Period, Statistic} = useFetch("get/PDF", PDF_ID)
 
     const Header = Object.keys(Statistic ? Statistic[0] : {})
     const Date_Header_Font_Size = 20
