@@ -23,7 +23,7 @@ class Statistic(Transaction):
         self.Merging_Dataframes()
         self.Calculate_Range()
         self.Round()
-        self.Append_Dollar_Sign()
+        self.Statistic_Dataframe = self.Append_Dollar_Sign(self.Statistic_Dataframe)
 
         self._Statistic_Model = self.Statistic_Dataframe.to_dict(orient="records")
         
@@ -54,9 +54,11 @@ class Statistic(Transaction):
         Numeric_Columns = self.Statistic_Dataframe.select_dtypes(include=[numpy.number])
         self.Statistic_Dataframe.loc[:, Numeric_Columns.columns] = numpy.round(Numeric_Columns, 2)
 
-    def Append_Dollar_Sign(self):
+    def Append_Dollar_Sign(self, Dataframe) -> panda.DataFrame:
         Dollar_Columns = [self.Mean_Column, self.Max_Column, self.Min_Column, self.Range_Column]
-        self.Statistic_Dataframe[Dollar_Columns] = '$' + self.Statistic_Dataframe[Dollar_Columns].astype(str)
+        Dataframe[Dollar_Columns] = '$' + Dataframe[Dollar_Columns].astype(str)
+        return Dataframe
+
 
     @property
     def Statistic_Model(self):
