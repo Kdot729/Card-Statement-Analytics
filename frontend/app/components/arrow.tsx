@@ -22,8 +22,8 @@ const Arrow = ({Column}): JSX.Element =>
     const { value } = useSelector((state) => state["Sorting"])
     const Dispatch = useDispatch()
 
-    const Arrow_Size = 15
-    const Move_Vertically = 7.5
+    const Arrow_Size = 24
+    const Move_Vertically = 10.5
     const Arrow_Color = "rgb(7, 21, 177)"
 
     const Dispatching = (Sort_Function) => Dispatch(Sort_Function(Column_Ref.current.props.id))
@@ -38,8 +38,8 @@ const Arrow = ({Column}): JSX.Element =>
         const Sort = Arrow["Press"]
         const ID = `${Column}-${Arrow["Sort"]}`
 
-        return <FontAwesome id={ID} ref={Column_Ref} style={Transform} name={Direction}  
-                    size={Arrow_Size} color={Arrow_Color} key={Direction} onPress={Sort}/>
+        return <FontAwesome id={ID} key={ID} ref={Column_Ref} style={Transform} name={Direction}  
+                    size={Arrow_Size} color={Arrow_Color} onPress={Sort}/>
     })
 
     return  <View style={Center}>
