@@ -29,7 +29,7 @@ export const Table = () =>
                                     
                                     const Component =   <>
                                                             <Text style={Text_Styles}>{Header}</Text>
-                                                            <Arrow />
+                                                            <Arrow Column={Header}/>
                                                         </>
 
                                     return <Table_Row key={Header} Component={Component} />
