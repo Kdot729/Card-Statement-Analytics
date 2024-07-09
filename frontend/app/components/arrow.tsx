@@ -5,17 +5,6 @@ import { Center } from '../css/main';
 import { useDispatch, useSelector } from 'react-redux';
 import { Ascending, Descending, Unsorted } from '@/scripts/redux/sort';
 
-const Sort_Ascending = () => 
-{
-
-}
-
-const Sort_Descending = () => 
-{
-
-}
-
-
 const Arrow = ({Column}): JSX.Element =>
 {
     const Column_Ref = useRef(null)
