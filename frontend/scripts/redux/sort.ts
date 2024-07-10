@@ -9,12 +9,18 @@ export const Sort_Slice = createSlice(
     name: 'Sort',
     initialState,
     reducers:   {
-                    Ascending: (state, action) => {},
-                    Descending: (state, action) => {},
-                    Unsorted: (state) => {},
+                    Unsorted: (state, action) => {},
+                    Sorted: (state, action) => {Sort_Table(action.payload)}
                 },
 })
 
-export const { Ascending, Descending, Unsorted } = Sort_Slice.actions
+const Sort_Table = (ID) => 
+{
+    const Split_ID: string = ID.split("-");
+    const Column: string = Split_ID[0]
+    const Sort_Direction: string = Split_ID[1].toLocaleLowerCase()
+}
+
+export const { Sorted, Unsorted } = Sort_Slice.actions
 
 export default Sort_Slice.reducer
