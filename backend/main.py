@@ -1,8 +1,10 @@
 from fastapi import FastAPI, APIRouter, Request
 from fastapi.middleware.cors import CORSMiddleware
+from backend.database.models import Sorting, Sorting_Column
 from backend.database.serializers import Analytics_Deserializer
 from backend.database.settings import API_Collection
 import json
+from backend.dataframe.sort import Sort
 from backend.dataframe.statistic import Statistic
 from backend.dataframe.transaction import Transaction
 from backend.extract_pdf.extract import Extract
@@ -51,5 +53,18 @@ async def Post_PDF(request: Request):
         pass
     
     return {"status": 200}
+
+@Router.get("/get/{sorting}/{sorting_column}/PDF/{id}")
+async def Get_PDF(sorting: Sorting, sorting_column: Sorting_Column, id: str):
+
+    Data = API_Collection.find_one({"PDF_ID": id})
+
+    if sorting is Sorting.Ascending:
+        Boolean_Sort = True
+
+    elif sorting is Sorting.Descending:
+        Boolean_Sort = False
+
+    Sort(Data["Statistic"], sorting_column.value, Boolean_Sort)
 
 app.include_router(Router)
