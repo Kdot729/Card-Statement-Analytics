@@ -1,4 +1,4 @@
-from enum import StrEnum, auto
+from enum import StrEnum, Enum, auto
 from pydantic import BaseModel
 
 class Statistic(BaseModel):
@@ -28,3 +28,11 @@ class Sorting(StrEnum):
             if Field == Value:
                 return Field
         return None
+
+class Sorting_Column(Enum):
+    ID = "ID"
+    Mean = "Mean"
+    Min = "Min"
+    Max = "Max"
+    Range = "Range"
+    Freq = "Freq"
