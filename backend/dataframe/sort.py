@@ -6,11 +6,14 @@ class Sort(Statistic):
 
     Remove_Dollar_Sign_Columns = [Statistic.Mean_Column, Statistic.Max_Column, Statistic.Min_Column, Statistic.Range_Column]
 
-    def __init__(self, Records):
+    def __init__(self, Records, Sorting_Column, Boolean_Sort):
         Statistic_Dataframe = panda.DataFrame.from_dict(Records)
+
         Dataframe.__init__(self, Statistic_Dataframe)
         self.Removing_Character()
         self.Convert_to_Numeric()
+        Dataframe.Sort(self, Sorting_Column, Boolean_Sort)
+
         self.Statistic_Dataframe = Statistic.Append_Dollar_Sign(self, self._Dataframe)
 
     def Removing_Character(self) -> None:
