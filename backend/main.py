@@ -55,7 +55,7 @@ async def Post_PDF(request: Request):
     return {"status": 200}
 
 @Router.get("/get/{sorting}/{sorting_column}/PDF/{id}")
-async def Get_PDF(sorting: Sorting, sorting_column: Sorting_Column, id: str):
+async def Get_Sorted_PDF(sorting: Sorting, sorting_column: Sorting_Column, id: str):
 
     Data = API_Collection.find_one({"PDF_ID": id})
 
@@ -65,6 +65,8 @@ async def Get_PDF(sorting: Sorting, sorting_column: Sorting_Column, id: str):
     elif sorting is Sorting.Descending:
         Boolean_Sort = False
 
-    Sort(Data["Statistic"], sorting_column.value, Boolean_Sort)
+    Sorted_Data = Sort(Data["Statistic"], sorting_column.value, Boolean_Sort)
+
+    return {"Statistic": Sorted_Data._Statistic_Model}
 
 app.include_router(Router)
