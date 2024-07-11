@@ -15,7 +15,8 @@ class Sort(Statistic):
         Dataframe.Sort(self, Sorting_Column, Boolean_Sort)
 
         self.Statistic_Dataframe = Statistic.Append_Dollar_Sign(self, self._Dataframe)
-
+        Statistic.Convert_Dataframe_to_Dictionary(self)
+        
     def Removing_Character(self) -> None:
         for Column in self.Remove_Dollar_Sign_Columns:
             Dataframe.Removing_Character(self, Column, "$")

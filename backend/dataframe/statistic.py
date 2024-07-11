@@ -25,7 +25,7 @@ class Statistic(Transaction):
         self.Round()
         self.Statistic_Dataframe = self.Append_Dollar_Sign(self.Statistic_Dataframe)
 
-        self._Statistic_Model = self.Statistic_Dataframe.to_dict(orient="records")
+        self.Convert_Dataframe_to_Dictionary()
         
     def Calculate_Mean(self) -> None:
 
@@ -59,7 +59,9 @@ class Statistic(Transaction):
         Dataframe[Dollar_Columns] = '$' + Dataframe[Dollar_Columns].astype(str)
         return Dataframe
 
-
+    def Convert_Dataframe_to_Dictionary(self, Orient: str = "records") -> None:
+        self._Statistic_Model = self.Statistic_Dataframe.to_dict(orient="records")
+    
     @property
     def Statistic_Model(self):
         return self._Statistic_Model
