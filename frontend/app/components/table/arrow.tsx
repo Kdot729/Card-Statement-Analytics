@@ -1,7 +1,7 @@
 import {View, StyleSheet} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import React, { createRef, useRef } from "react";
-import { Center } from '../../scripts/css/main';
+import { Center } from '@/scripts/css/main';
 import { useDispatch } from 'react-redux';
 import { Sorted } from '@/scripts/redux/sort';
 
