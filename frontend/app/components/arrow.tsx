@@ -1,16 +1,15 @@
 import {View, StyleSheet} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import React, { createRef, useRef } from "react";
-import { Center } from '../css/main';
-import { useDispatch, useSelector } from 'react-redux';
-import { Sorted, Unsorted } from '@/scripts/redux/sort';
+import { Center } from '../../scripts/css/main';
+import { useDispatch } from 'react-redux';
+import { Sorted } from '@/scripts/redux/sort';
 
 const Arrow = ({Column}): JSX.Element =>
 {
     //Note There's 2 createRef because each column has 2 arrows
     const Column_Ref = useRef([createRef(), createRef()]);
 
-    const { value } = useSelector((state) => state["Sorting"])
     const Dispatch = useDispatch()
 
     const Arrow_Size = 24
