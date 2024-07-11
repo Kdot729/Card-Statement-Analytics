@@ -3,7 +3,7 @@ import {View, Text, Button, StyleSheet} from 'react-native';
 import { useState } from 'react';
 import * as DocumentPicker from 'expo-document-picker';
 import { AxiosInstance } from "../../scripts/axios_interceptor";
-import { Table } from "./table";
+import { Table } from "./table/table";
 import { Create_Context } from "../../scripts/hook/context";
 import React from "react";
 import * as FileSystem from 'expo-file-system';
