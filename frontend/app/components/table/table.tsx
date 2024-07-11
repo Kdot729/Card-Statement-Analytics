@@ -1,8 +1,8 @@
 import {View, StyleSheet} from 'react-native';
 import React from "react";
-import Table_Date from './table/date';
+import Table_Date from './date';
 import { Center, Margin } from '@/scripts/css/main';
-import Table_Flatlist from './table/flatlist';
+import Table_Flatlist from './flatlist';
 
 export const Table = () =>
 {
