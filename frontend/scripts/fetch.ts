@@ -9,7 +9,7 @@ export const useFetch = (API_Parameters: string, PDF_ID: string) =>
         return await data
     }
 
-    const {data, status} = useQuery("Fetch", () => Get_Request())
+    const {data, status} = useQuery(API_Parameters, () => Get_Request())
 
     return status != "success" ? [[]] : data
 }
