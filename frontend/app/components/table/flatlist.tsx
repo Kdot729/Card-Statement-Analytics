@@ -13,7 +13,7 @@ const Table_Flatlist = () =>
     const {Statistic} = useFetch(URL, PDF_ID)
 
     return <FlatList data={Statistic} ListHeaderComponent={<Table_Header />} 
-        keyExtractor={(Transaction) => Transaction["ID"]} renderItem={Table_Body} />
+        keyExtractor={(Transaction) => Transaction["ID"]} renderItem={Table_Body} scrollEnabled={false}/>
 }
 
 export default Table_Flatlist
