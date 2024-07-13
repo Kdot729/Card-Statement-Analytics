@@ -23,6 +23,8 @@ class Transaction(Dataframe):
         self.Extract_Location()
         self.Create_New_Transaction()
         self.Change_Values_for_Discover()
+        Dataframe.Removing_Character(self, self.Amount_Column, "$", "")
+        self._Dataframe[self.Amount_Column] = self._Dataframe[self.Amount_Column].astype(float)
 
     def Extract_Corporation(self):
         self._Dataframe[self.Corporation_Column] = self._Dataframe[self.ID_Column].str.split(" ").str[0].str.split(".").str[0]

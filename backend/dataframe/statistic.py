@@ -28,9 +28,6 @@ class Statistic(Transaction):
         self.Convert_Dataframe_to_Dictionary()
         
     def Calculate_Mean(self) -> None:
-
-        Dataframe.Removing_Character(self, Transaction.Amount_Column, "$", "")
-        self._Dataframe[Transaction.Amount_Column] = self._Dataframe[Transaction.Amount_Column].astype(float)
         self.Transaction_Mean = self.Transaction_Group.mean(numeric_only=True).reset_index()
 
     def Calculate_Extremas(self) -> None:
