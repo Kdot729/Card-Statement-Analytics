@@ -27,8 +27,15 @@ class Dataframe():
     
     def Sort(self, Column: str, Boolean_Sort: bool) -> None:
         self._Dataframe = self._Dataframe.sort_values(by=[Column], ascending=Boolean_Sort)
-        
+    
+    def Convert_Dataframe_to_Dictionary(self, Dataframe: panda.DataFrame, Orient: str = "records") -> None:
+        self._Records = Dataframe.to_dict(orient="records")
+
     @property
     def Dataframe(self):
         return self._Dataframe
+    
+    @property
+    def Records(self):
+        return self._Records
     

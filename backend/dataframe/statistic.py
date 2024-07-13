@@ -25,7 +25,7 @@ class Statistic(Transaction):
         self.Round()
         self.Statistic_Dataframe = self.Append_Dollar_Sign(self.Statistic_Dataframe)
 
-        self.Convert_Dataframe_to_Dictionary()
+        Dataframe.Convert_Dataframe_to_Dictionary(self, self.Statistic_Dataframe)
         
     def Calculate_Mean(self) -> None:
         self.Transaction_Mean = self.Transaction_Group.mean(numeric_only=True).reset_index()
@@ -55,10 +55,3 @@ class Statistic(Transaction):
         Dollar_Columns = [self.Mean_Column, self.Max_Column, self.Min_Column, self.Range_Column]
         Dataframe[Dollar_Columns] = '$' + Dataframe[Dollar_Columns].astype(str)
         return Dataframe
-
-    def Convert_Dataframe_to_Dictionary(self, Orient: str = "records") -> None:
-        self._Statistic_Model = self.Statistic_Dataframe.to_dict(orient="records")
-    
-    @property
-    def Statistic_Model(self):
-        return self._Statistic_Model
