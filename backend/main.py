@@ -45,6 +45,7 @@ async def Post_PDF(request: Request):
 
         Data["Activity_Period"] = PDF_Object.Activity_Period
         Data["Statistic"] = Statistic_Object.Records
+        Data["Records"] = Transaction_Object.Records
 
         response = API_Collection.insert_one(Data)
         # print("ID:", response.inserted_id)
