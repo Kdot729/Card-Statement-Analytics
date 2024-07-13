@@ -44,7 +44,7 @@ async def Post_PDF(request: Request):
         Statistic_Object = Statistic(Transaction_Object.Dataframe)
 
         Data["Activity_Period"] = PDF_Object.Activity_Period
-        Data["Statistic"] = Statistic_Object.Statistic_Model
+        Data["Statistic"] = Statistic_Object.Records
 
         response = API_Collection.insert_one(Data)
         # print("ID:", response.inserted_id)
@@ -67,6 +67,6 @@ async def Get_Sorted_PDF(sorting: Sorting, sorting_column: Sorting_Column, id: s
 
     Sorted_Data = Sort(Data["Statistic"], sorting_column.value, Boolean_Sort)
 
-    return {"Statistic": Sorted_Data._Statistic_Model}
+    return {"Statistic": Sorted_Data.Records}
 
 app.include_router(Router)
