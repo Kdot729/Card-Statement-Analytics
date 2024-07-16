@@ -24,7 +24,7 @@ class Transaction(Dataframe):
         self.Create_New_Transaction()
         self.Change_Values_for_Discover()
         Dataframe.Removing_Character(self, self.Amount_Column, "$", "")
-        self._Dataframe[self.Amount_Column] = self._Dataframe[self.Amount_Column].astype(float)
+        Dataframe.Change_Column_Type(self, self.Amount_Column, float)
         Dataframe.Convert_Dataframe_to_Dictionary(self, self._Dataframe)
 
     def Extract_Corporation(self):
