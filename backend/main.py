@@ -4,6 +4,7 @@ from backend.database.models import Sorting, Sorting_Column
 from backend.database.serializers import Analytics_Deserializer
 from backend.database.settings import API_Collection
 import json
+from backend.dataframe.graphs.pie import Pie
 from backend.dataframe.sort import Sort
 from backend.dataframe.statistic import Statistic
 from backend.dataframe.transaction import Transaction
@@ -69,5 +70,13 @@ async def Get_Sorted_PDF(sorting: Sorting, sorting_column: Sorting_Column, id: s
     Sorted_Data = Sort(Data["Statistic"], sorting_column.value, Boolean_Sort)
 
     return {"Statistic": Sorted_Data.Records}
+
+@Router.get("/get/pie/PDF/{id}")
+async def Get_Pie_Data(id: str):
+
+    Data = API_Collection.find_one({"PDF_ID": id})
+    Pie_Data = Pie(Data["Records"])
+    
+    return {"Pie": Pie_Data.Records}
 
 app.include_router(Router)
