@@ -10,6 +10,7 @@ class Transaction(Dataframe):
     Category_Column = "Category"
     Corporation_Column = "Corporation"
     Location_Column = "Location"
+    Percentage_Column = "Percentage"
 
     Columns = [Transaction_Date_Column, Post_Date_Column, ID_Column, Amount_Column, Category_Column]
 
@@ -49,3 +50,15 @@ class Transaction(Dataframe):
         
         Replace_String(self.ID_Column, "Discover Payment")
         Replace_String(self.Corporation_Column, "Discover")
+
+    def Calulcate_Sum_Percentage(self, Dataframe: panda.DataFrame) -> panda.DataFrame:
+
+        def Round_Percentage(Percent):
+            return round(Percent, 2)
+        
+        Sum_Positive = Dataframe[Transaction.Amount_Column][Dataframe[Transaction.Amount_Column].gt(0)].sum()
+
+        Calculate_Percent = lambda row: Round_Percentage((row / Sum_Positive) * 100) if row > 0 else Round_Percentage(row / Sum_Positive)
+        Dataframe[self.Percentage_Column] = Dataframe[Transaction.Amount_Column].apply(Calculate_Percent)
+
+        return Dataframe
