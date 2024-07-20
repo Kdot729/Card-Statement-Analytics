@@ -1,4 +1,5 @@
 from functools import partial, reduce
+from typing import Callable
 import pandas as panda
 
 panda.set_option('display.max_rows', None)
@@ -33,6 +34,9 @@ class Dataframe():
 
     def Change_Column_Type(self, Column: str, Column_Type: object = str) -> None:
         self._Dataframe[Column] = self._Dataframe[Column].astype(Column_Type)
+
+    def Applying_Column_Lambda(self, Columns: str | list[str], Lambda: Callable) -> panda.DataFrame:
+        return self._Dataframe[Columns].apply(Lambda)
 
     @property
     def Dataframe(self):
