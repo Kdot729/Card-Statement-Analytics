@@ -13,7 +13,8 @@ class Dataframe():
         self._Dataframe = Dataframe
 
     def Trim_All_Columns(self, Columns: list[str]) -> None:
-        self._Dataframe[Columns] = self._Dataframe[Columns].apply(lambda row: row.str.strip())
+        Stripping_Value = lambda row: row.str.strip()
+        self._Dataframe[Columns] = self.Applying_Column_Lambda(Columns, Stripping_Value)
 
     def Removing_Character(self, Column: str, Remove_Character=" ", New_Character="") -> None:
         self._Dataframe[Column] = self._Dataframe[Column].str.replace(Remove_Character, New_Character)

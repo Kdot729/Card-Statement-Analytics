@@ -19,7 +19,7 @@ class Graph(Transaction):
         Transaction_Colors = dict(zip(Transactions, self.RGB_Colors))
 
         Colorize_Transaction = lambda row: Transaction_Colors[row]
-        self._Dataframe[self.Color_Column] = self._Dataframe[Transaction.ID_Column].apply(Colorize_Transaction)
+        self._Dataframe[self.Color_Column] = Dataframe.Applying_Column_Lambda(self, Transaction.ID_Column, Colorize_Transaction)
 
     def Generate_RGB(self):
 

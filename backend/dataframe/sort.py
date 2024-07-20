@@ -22,4 +22,4 @@ class Sort(Statistic):
             Dataframe.Removing_Character(self, Column, "$")
 
     def Convert_to_Numeric(self) -> None:
-        self.Dataframe[self.Remove_Dollar_Sign_Columns] = self.Dataframe[self.Remove_Dollar_Sign_Columns].apply(panda.to_numeric)
+        self._Dataframe[self.Remove_Dollar_Sign_Columns] = Dataframe.Applying_Column_Lambda(self, self.Remove_Dollar_Sign_Columns, panda.to_numeric)
