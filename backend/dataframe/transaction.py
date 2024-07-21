@@ -64,16 +64,16 @@ class Transaction(Dataframe):
 
         return Dataframe
 
-    def Colorize(self) -> None:
+    def Colorize(self, Colorized_Dataframe) -> None:
 
-        Transactions = list(self._Dataframe[Transaction.ID_Column].drop_duplicates())
+        Transactions = list(Colorized_Dataframe[Transaction.ID_Column].drop_duplicates())
 
         self.RGB_Colors = [self.Generate_RGB() for Transaction in range(len(Transactions))]
         self.RGB_Colors = self.Check_Duplicate_Colors()
         Transaction_Colors = dict(zip(Transactions, self.RGB_Colors))
 
         Colorize_Transaction = lambda row: Transaction_Colors[row]
-        self._Dataframe[self.Color_Column] = Dataframe.Applying_Column_Lambda(self, Transaction.ID_Column, Colorize_Transaction)
+        Colorized_Dataframe[self.Color_Column] = Dataframe.Applying_Column_Lambda(self, Transaction.ID_Column, Colorize_Transaction)
 
     def Generate_RGB(self):
 
