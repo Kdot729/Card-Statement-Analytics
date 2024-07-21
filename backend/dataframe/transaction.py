@@ -70,9 +70,9 @@ class Transaction(Dataframe):
 
         self.RGB_Colors = [self.Generate_RGB() for Transaction in range(len(Transactions))]
         self.RGB_Colors = self.Check_Duplicate_Colors()
-        Transaction_Colors = dict(zip(Transactions, self.RGB_Colors))
+        self._Transaction_Colors = dict(zip(Transactions, self.RGB_Colors))
 
-        Colorize_Transaction = lambda row: Transaction_Colors[row]
+        Colorize_Transaction = lambda row: self._Transaction_Colors[row]
         Colorized_Dataframe[self.Color_Column] = Dataframe.Applying_Column_Lambda(self, Transaction.ID_Column, Colorize_Transaction)
 
     def Generate_RGB(self):
@@ -95,4 +95,9 @@ class Transaction(Dataframe):
 
             No_Duplicates_RGB_Colors = numpy.append(No_Duplicates_RGB_Colors, Append_RGB_Colors)
         
-        return No_Duplicates_RGB_Colors
+        #Note Convert numpy array to array 
+        return list(No_Duplicates_RGB_Colors)
+    
+    @property
+    def Transaction_Colors(self):
+        return self._Transaction_Colors
