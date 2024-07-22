@@ -24,7 +24,8 @@ class Statistic(Transaction):
         self.Calculate_Range()
         self.Round()
         self.Statistic_Dataframe = self.Append_Dollar_Sign(self.Statistic_Dataframe)
-
+        Transaction.Colorize(self, self.Statistic_Dataframe)
+        self.Statistic_Dataframe = self.Statistic_Dataframe.drop(columns=[self.Color_Column])
         Dataframe.Convert_Dataframe_to_Dictionary(self, self.Statistic_Dataframe)
         
     def Calculate_Mean(self) -> None:
