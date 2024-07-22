@@ -76,7 +76,7 @@ async def Get_Sorted_PDF(sorting: Sorting, sorting_column: Sorting_Column, id: s
 async def Get_Pie_Data(id: str):
 
     Data = API_Collection.find_one({"PDF_ID": id})
-    Pie_Data = Pie(Data["Records"])
+    Pie_Data = Pie(Data["Records"], Data["Color"])
     
     return {"Pie": Pie_Data.Records}
 
