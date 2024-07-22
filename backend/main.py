@@ -37,7 +37,7 @@ async def Post_PDF(request: Request):
     PDF_ID = (await request.json())["PDF_ID"]
     Data = {"PDF_ID": PDF_ID}
     PDF = (await request.json())["PDF"]
-
+    
     if API_Collection.count_documents(Data, limit = 1) == 0:
 
         PDF_Object = Extract(PDF_ID, PDF)
@@ -47,6 +47,7 @@ async def Post_PDF(request: Request):
         Data["Activity_Period"] = PDF_Object.Activity_Period
         Data["Statistic"] = Statistic_Object.Records
         Data["Records"] = Transaction_Object.Records
+        Data["Color"] = Statistic_Object.Transaction_Colors
 
         response = API_Collection.insert_one(Data)
         # print("ID:", response.inserted_id)
