@@ -14,7 +14,7 @@ const Pie = () =>
     const Pie_Generator = pie().value((Transaction) => {return Transaction.Amount})
     const Pie_Data = Pie_Generator(Pie ?? [])
 
-    const Pie_Arcs = Pie_Data.map(({data: {Amount, Color, ID}, endAngle, startAngle}) =>
+    const Pie_Arcs = Pie_Data.map(({data: {Amount, Color, ID, Percentage}, endAngle, startAngle}) =>
     {
 
         const Arc = arc()({
@@ -24,7 +24,7 @@ const Pie = () =>
                         endAngle: endAngle,
                     })
 
-        return  {Amount, Color, ID, Path: Arc}
+        return  {Amount, Color, ID, Percentage, Path: Arc}
     })
 
     const Pie_Graph = Pie_Arcs.map((Arc, index) => 
