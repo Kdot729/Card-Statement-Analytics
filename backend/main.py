@@ -70,7 +70,7 @@ async def Get_Sorted_PDF(sorting: Sorting, sorting_column: Sorting_Column, id: s
 
     Sorted_Data = Sort(Data["Statistic"], sorting_column.value, Boolean_Sort)
 
-    return {"Statistic": Sorted_Data.Records}
+    return {"Statistic": Sorted_Data.Records, "Color": Data["Color"]}
 
 @Router.get("/get/pie/PDF/{id}")
 async def Get_Pie_Data(id: str):
