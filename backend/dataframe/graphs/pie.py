@@ -18,10 +18,12 @@ class Pie(Graph):
         self.Merge_Color_Dateframe(Transaction_Colors)
         Dataframe.Convert_Dataframe_to_Dictionary(self, self.Pie_Dataframe)
 
-
     def Merge_Color_Dateframe(self, Transaction_Colors):
 
         Columns = [Transaction.ID_Column, Transaction.Color_Column]
         Color_Dataframe = panda.DataFrame.from_dict(Transaction_Colors, orient="index").reset_index()
         Color_Dataframe.columns = Columns
         self.Pie_Dataframe = self.Pecentage_Transaction_Dataframe.merge(Color_Dataframe, on=Transaction.ID_Column, how='outer')
+
+        #Note Getting rid of Discover Payment so it doesn't show up in the pie graph
+        self.Pie_Dataframe = self.Pie_Dataframe[self.Pie_Dataframe[Transaction.ID_Column] != "Discover Payment"]
