@@ -77,10 +77,12 @@ class Transaction(Dataframe):
 
     def Generate_RGB(self):
 
-        def Randomize():
-            return random.randint(0, 255)
         
-        return f"rgb({Randomize()}, {Randomize()}, {Randomize()})"
+        def Randomize(Lower_Bound: int = 0, Upper_Bound = 255):
+            return random.randint(Lower_Bound, Upper_Bound)
+        
+        #Note Setting the lower and upper bound of one the colors to guarantee the color isn't black or white
+        return f"rgb({Randomize(50, 200)}, {Randomize()}, {Randomize()})"
     
     def Check_Duplicate_Colors(self):
 
