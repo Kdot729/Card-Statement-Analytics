@@ -36,3 +36,7 @@ class Sorting_Column(Enum):
     Max = "Max"
     Range = "Range"
     Freq = "Freq"
+
+class Graph(StrEnum):
+    Bar = auto()
+    Pie = auto()
