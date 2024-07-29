@@ -1,9 +1,10 @@
 from fastapi import FastAPI, APIRouter, Request
 from fastapi.middleware.cors import CORSMiddleware
-from backend.database.models import Sorting, Sorting_Column
+from backend.database.models import Graph, Sorting, Sorting_Column
 from backend.database.serializers import Analytics_Deserializer
 from backend.database.settings import API_Collection
 import json
+from backend.dataframe.graphs.bar import Bar
 from backend.dataframe.graphs.pie import Pie
 from backend.dataframe.sort import Sort
 from backend.dataframe.statistic import Statistic
@@ -72,12 +73,19 @@ async def Get_Sorted_PDF(sorting: Sorting, sorting_column: Sorting_Column, id: s
 
     return {"Statistic": Sorted_Data.Records, "Color": Data["Color"]}
 
-@Router.get("/get/pie/PDF/{id}")
-async def Get_Pie_Data(id: str):
+@Router.get("/get/{graph}/PDF/{id}")
+async def Get_Graph_Data(graph: Graph, id: str):
 
     Data = API_Collection.find_one({"PDF_ID": id})
-    Pie_Data = Pie(Data["Records"], Data["Color"])
+
+    if graph is Graph.Pie:
+        Graph_Data = Pie(Data["Records"], Data["Color"])
+        JSON_Key = "Pie"
     
-    return {"Pie": Pie_Data.Records}
+    elif graph is Graph.Bar:
+        Graph_Data = Bar(Data["Records"], Data["Color"])
+        JSON_Key = "Bar"
+
+    return {JSON_Key: Graph_Data.Records}
 
 app.include_router(Router)
