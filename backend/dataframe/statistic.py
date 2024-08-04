@@ -22,7 +22,7 @@ class Statistic(Transaction):
         self.Calculate_Occurrence()
         self.Merging_Dataframes()
         self.Calculate_Range()
-        self.Round()
+        Transaction.Round(self, self.Statistic_Dataframe)
         self.Statistic_Dataframe = self.Append_Dollar_Sign(self.Statistic_Dataframe)
         Transaction.Colorize(self, self.Statistic_Dataframe)
         self.Statistic_Dataframe = self.Statistic_Dataframe.drop(columns=[self.Color_Column])
@@ -47,10 +47,6 @@ class Statistic(Transaction):
 
     def Calculate_Occurrence(self) -> None:
         self.Occurence = self.Dataframe[Transaction.ID_Column].value_counts().reset_index()
-
-    def Round(self):
-        Numeric_Columns = self.Statistic_Dataframe.select_dtypes(include=[numpy.number])
-        self.Statistic_Dataframe.loc[:, Numeric_Columns.columns] = numpy.round(Numeric_Columns, 2)
 
     def Append_Dollar_Sign(self, Dataframe) -> panda.DataFrame:
         Dollar_Columns = [self.Mean_Column, self.Max_Column, self.Min_Column, self.Range_Column]

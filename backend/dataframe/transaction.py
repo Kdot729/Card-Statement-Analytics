@@ -100,6 +100,10 @@ class Transaction(Dataframe):
         #Note Convert numpy array to array 
         return list(No_Duplicates_RGB_Colors)
     
+    def Round(self, Dataframe: panda.DataFrame) -> None:
+        Numeric_Columns = Dataframe.select_dtypes(include=[numpy.number])
+        Dataframe.loc[:, Numeric_Columns.columns] = numpy.round(Numeric_Columns, 2)
+
     @property
     def Transaction_Colors(self):
         return self._Transaction_Colors
