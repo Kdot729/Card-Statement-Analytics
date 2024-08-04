@@ -27,4 +27,4 @@ class Bar(Graph):
         Color_Dataframe = panda.DataFrame.from_dict(self._Transaction_Colors, orient="index").reset_index()
         Color_Dataframe.columns = Columns
         self.Transaction_Color_Dataframe = self.Pecentage_Transaction_Dataframe.merge(Color_Dataframe, on=Transaction.ID_Column, how='outer')
-
+        Transaction.Round(self, self.Transaction_Color_Dataframe)
