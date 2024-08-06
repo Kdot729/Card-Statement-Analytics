@@ -18,7 +18,7 @@ class Bar(Graph):
         Dataframe.Removing_Character(self, Transaction.Amount_Column, "$", "")
         Dataframe.Change_Column_Type(self, Transaction.Amount_Column, float)
 
-        Transaction_Sum = self._Dataframe.groupby([Transaction.ID_Column])[self.Amount_Column].sum().reset_index()
+        Transaction_Sum = Dataframe.Group_By(self, Transaction.ID_Column)[self.Amount_Column].sum().reset_index()
         self.Pecentage_Transaction_Dataframe = Transaction.Calulcate_Sum_Percentage(self, Transaction_Sum)
 
     def Merge_Color_Dateframe(self):
