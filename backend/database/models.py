@@ -40,3 +40,4 @@ class Sorting_Column(Enum):
 class Graph(StrEnum):
     Bar = auto()
     Pie = auto()
+    Line = auto()
