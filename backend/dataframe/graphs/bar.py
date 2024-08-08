@@ -10,7 +10,7 @@ class Bar(Graph):
         super().__init__(panda.DataFrame.from_dict(Records))  
         self._Transaction_Colors = Transaction_Colors
         self.Create_Percentage_Dataframe()
-        self.Merge_Color_Dateframe()
+        Graph.Merge_Color_Dateframe(self, self.Pecentage_Transaction_Dataframe)
         Dataframe.Convert_Dataframe_to_Dictionary(self, self.Transaction_Color_Dataframe)
 
     def Create_Percentage_Dataframe(self):
@@ -20,11 +20,3 @@ class Bar(Graph):
 
         Transaction_Sum = Dataframe.Group_By(self, Transaction.ID_Column)[self.Amount_Column].sum().reset_index()
         self.Pecentage_Transaction_Dataframe = Transaction.Calulcate_Sum_Percentage(self, Transaction_Sum)
-
-    def Merge_Color_Dateframe(self):
-
-        Columns = [Transaction.ID_Column, Transaction.Color_Column]
-        Color_Dataframe = panda.DataFrame.from_dict(self._Transaction_Colors, orient="index").reset_index()
-        Color_Dataframe.columns = Columns
-        self.Transaction_Color_Dataframe = self.Pecentage_Transaction_Dataframe.merge(Color_Dataframe, on=Transaction.ID_Column, how='outer')
-        Transaction.Round(self, self.Transaction_Color_Dataframe)
