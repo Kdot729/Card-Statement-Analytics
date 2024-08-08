@@ -31,7 +31,7 @@ class Dataframe():
         self._Dataframe = self._Dataframe.sort_values(by=[Column], ascending=Boolean_Sort)
     
     def Convert_Dataframe_to_Dictionary(self, Dataframe: panda.DataFrame, Orient: str = "records") -> None:
-        self._Records = Dataframe.to_dict(orient="records")
+        self._Records = Dataframe.to_dict(orient=Orient)
 
     def Change_Column_Type(self, Column: str, Column_Type: object = str) -> None:
         self._Dataframe[Column] = self._Dataframe[Column].astype(Column_Type)
