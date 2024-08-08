@@ -39,6 +39,9 @@ class Dataframe():
     def Applying_Column_Lambda(self, Columns: str | list[str], Lambda: Callable) -> panda.DataFrame:
         return self._Dataframe[Columns].apply(Lambda)
 
+    def Sum_Group_By(self, Grouped_Column: str, Sum_Column: str) -> panda.DataFrame:
+        return self.Group_By(Grouped_Column)[Sum_Column].sum().reset_index()
+    
     @property
     def Dataframe(self):
         return self._Dataframe
