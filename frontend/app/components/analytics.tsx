@@ -3,13 +3,15 @@ import { Table } from './table/table'
 import { ScrollView } from 'react-native'
 import Pie from './graphs/pie'
 import Bar from './graphs/bar'
+import LineGraph from './graphs/line'
 
 const Analytics = () => 
 { 
     return  <ScrollView >
                 <Table />
                 <Bar />
-                <Pie></Pie>
+                <LineGraph />
+                <Pie />
             </ScrollView>
 }
 
