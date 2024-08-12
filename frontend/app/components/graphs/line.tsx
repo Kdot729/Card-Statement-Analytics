@@ -93,7 +93,7 @@ export const Scale_Linear_Y_Axis = (Y_Scale) =>
             const Translate_Group_Element = `translate(35, ${Y_Coordinate_to_Translate})`
             
             const Line_Properties = {x1: 8, x2: SVG_Width}
-            const Text_Properties = {x: -5, y: 0}
+            const Text_Properties = {x: -5, y: 3}
             return <Tick ClassName="y-tick" key={Y_Tick_Value} Transform={Translate_Group_Element} 
                         Line_Properties={Line_Properties} Text_Properties={Text_Properties} 
                         Value={Y_Tick_Value} />
