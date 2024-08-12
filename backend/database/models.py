@@ -41,3 +41,4 @@ class Graph(StrEnum):
     Bar = auto()
     Pie = auto()
     Line = auto()
+    Heatmap = auto()
