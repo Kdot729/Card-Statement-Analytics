@@ -1,6 +1,7 @@
+import { Calculate_Linear_Domain } from '@/scripts/axis'
 import { useFetch } from '@/scripts/fetch'
 import { Use_Context, Create_Context } from '@/scripts/hook/context'
-import { scaleBand, extent, scaleLinear } from 'd3'
+import { scaleBand, scaleLinear } from 'd3'
 import React from 'react'
 import { Dimensions } from 'react-native'
 import Svg, { G, Text, Rect, Line } from "react-native-svg"
@@ -31,14 +32,7 @@ export const Bar = () =>
                         .range([0, Graph_Height])
                         .padding(0.2)
 
-    let [Min, Max] = Bar ? extent(Bar.map((d) => {return d.Amount})) : [0, 0]
-
-    const Absolute_Min = Math.abs(Number(Min))
-    Max = Number(Max)
-    const Buffer_Axis = SVG_Width / 2
-
-    const Domain_Number = Absolute_Min > Max ? Absolute_Min : Max
-    const Buffer_Domain_Number = Domain_Number + Buffer_Axis
+    const Buffer_Domain_Number = Calculate_Linear_Domain(Bar, "Amount", SVG_Width)
 
     const X_ScaleLinear = scaleLinear()
                     .domain([-Buffer_Domain_Number, Buffer_Domain_Number])

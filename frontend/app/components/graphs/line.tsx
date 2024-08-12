@@ -4,6 +4,7 @@ import { Dimensions } from 'react-native'
 import { line, extent, scaleLinear, scaleTime, timeFormat, } from 'd3'
 import { useFetch } from '@/scripts/fetch'
 import { Use_Context, Create_Context } from '@/scripts/hook/context'
+import { Calculate_Linear_Domain } from '@/scripts/axis'
 
 const Margin = 5
 const SVG_Width = Dimensions.get('window').width - 25
@@ -22,15 +23,7 @@ export const LineGraph = () =>
     const Dates = Line ? Line.map((Day_of_Month) => {return new Date(Day_of_Month["Transaction Date"])}) : [new Date(), new Date()]
     let [Minumum_Date, Maximum_Date] = extent(Dates)
 
-    const Daily_Sums: number[] = Line ? Line.map((Day_of_Month) => {return Day_of_Month["Sum"]}) : [0, 0]
-    let [Min, Max] = extent(Daily_Sums)
-    
-    const Absolute_Min = Math.abs(Number(Min))
-    Max = Number(Max)
-    const Buffer_Axis = SVG_Width / 2
-
-    const Domain_Number = Absolute_Min > Max ? Absolute_Min : Max
-    const Buffer_Domain_Number = Domain_Number + Buffer_Axis
+    const Buffer_Domain_Number = Calculate_Linear_Domain(Line, "Sum", SVG_Height)
 
     const Y_Scale = scaleLinear()
                         .domain([-Buffer_Domain_Number, Buffer_Domain_Number])
