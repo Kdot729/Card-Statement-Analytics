@@ -106,8 +106,8 @@ export const Scale_Linear_Y_Axis = (Y_Scale) =>
 
 export const Scale_Linear_X_Axis = (X_Scale) =>
 {
-    const Ending_Tick_Position = SVG_Height - 120
-    const Starting_Tick_Position = Ending_Tick_Position - 11
+    const Ending_Tick_Position = SVG_Height - 130
+    const Starting_Tick_Position = Ending_Tick_Position - 6
 
     const Render_X_Axis = 
     X_Scale
@@ -120,7 +120,7 @@ export const Scale_Linear_X_Axis = (X_Scale) =>
         const Translate_Group_Element= `translate(${Calculated_X_Coordinate}, ${SVG_Height / 4})`
 
         const Line_Properties = {y1: Starting_Tick_Position, y2: Ending_Tick_Position}
-        const Text_Properties = {dy: ".71em", y: Ending_Tick_Position}
+        const Text_Properties = {dy: ".71em", y: Ending_Tick_Position + 2}
         return <Tick ClassName="x-tick" key={X_Tick_Value} Transform={Translate_Group_Element} 
                     Line_Properties={Line_Properties} Text_Properties={Text_Properties} 
                     Value={Day_of_Month} />
