@@ -1,5 +1,5 @@
 import React from 'react'
-import Svg, { G, Path, Line, Text } from "react-native-svg"
+import Svg, { G, Path, Line, Text, Rect } from "react-native-svg"
 import { Dimensions } from 'react-native'
 import { line, extent, scaleLinear, scaleTime, timeFormat, } from 'd3'
 import { useFetch } from '@/scripts/fetch'
@@ -44,6 +44,7 @@ export const LineGraph = () =>
                             .x((Day_of_Month) => 
                             {
                                 const X_Line_Coordinate = X_Scale(new Date(Day_of_Month["Transaction Date"])) + Adjusted_X_Coordinate
+                                Day_of_Month["Rectangle X"] = X_Line_Coordinate - 4
                                 return X_Line_Coordinate
                             })
                             .y((Day_of_Month) => 
@@ -59,11 +60,29 @@ export const LineGraph = () =>
 
     const Transform = `translate(0, ${Margin})`
 
+    const Rectangles =  Line ? Line.map((Value, index) =>
+    {
+        var Cumulative_Sum = 0
+        const Grouped_Rectangles = Value["Grouped Transactions"].map(({ID, Amount, Color}, index) =>
+        {
+            const Dimension = 7
+            const Y_Scale_Number = Amount + Cumulative_Sum
+            const Y_Coordinate = Y_Scale(Y_Scale_Number) - 1
+
+            Cumulative_Sum = Y_Scale_Number
+            return <Rect key={index} x={Value["Rectangle X"]} y={Y_Coordinate} fill={Color}
+                width={Dimension} height={Dimension}/>
+        })
+
+        return <G key={index}>{Grouped_Rectangles}</G>
+    }) : []
+
     return  <Svg width={SVG_Width} height={SVG_Height + 15}>
                 <G width={Graph_Width} height={Graph_Height}
                 transform={Transform}>
                     <Path d={Line_Path} opacity={1}
                         stroke="rgb(0, 0, 0)" fill="none" strokeWidth={2}/>
+                    {Rectangles}
                     {X_Axis}
                     {Y_Axis}
                 </G>
