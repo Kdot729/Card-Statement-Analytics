@@ -3,7 +3,7 @@ import Svg, { Path, G, Text } from "react-native-svg"
 import { useFetch } from '@/scripts/fetch';
 import { Use_Context, Create_Context } from '@/scripts/hook/context';
 import {Dimensions} from 'react-native';
-import { arc, pie } from 'd3';
+import { arc, ascending, pie } from 'd3';
 
 const Pie = () => 
 {
@@ -12,11 +12,7 @@ const Pie = () =>
     const {Pie} = useFetch("get/pie/PDF", PDF_ID)
     const Phone_Width = Dimensions.get('window').width
     
-    const Pie_Generator = pie().value((Transaction) => {return Transaction.Amount}).sort((First_Element, Second_Elment) => 
-    {
-        return Second_Elment.Amount < First_Element.Amount
-
-    })
+    const Pie_Generator = pie().value((Transaction) => {return Transaction.Amount}).sort(ascending)
 
     const Pie_Data = Pie_Generator(Pie ?? [])
     const Arc_Generator = arc()
