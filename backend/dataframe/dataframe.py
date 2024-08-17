@@ -42,6 +42,9 @@ class Dataframe():
     def Sum_Group_By(self, Grouped_Column: str, Sum_Column: str) -> panda.DataFrame:
         return self.Group_By(Grouped_Column)[Sum_Column].sum().reset_index()
     
+    def Drop_Columns(self, Dataframe: panda.DataFrame, Columns: str | list[str]) -> None: 
+        Dataframe.drop(columns=Columns, inplace=True)
+
     @property
     def Dataframe(self):
         return self._Dataframe
