@@ -7,6 +7,7 @@ import json
 from backend.dataframe.graphs.bar import Bar
 from backend.dataframe.graphs.pie import Pie
 from backend.dataframe.graphs.line import Line
+from backend.dataframe.graphs.heatmap import Heatmap
 from backend.dataframe.sort import Sort
 from backend.dataframe.statistic import Statistic
 from backend.dataframe.transaction import Transaction
@@ -90,6 +91,10 @@ async def Get_Graph_Data(graph: Graph, id: str):
     elif graph is Graph.Line:
         Graph_Data = Line(Data["Records"], Data["Color"])
         JSON_Key = "Line"
+    
+    elif graph is Graph.Heatmap:
+        Graph_Data = Heatmap(Data["Records"], Data["Activity_Period"])
+        JSON_Key = "Heatmap"
 
     return {JSON_Key: Graph_Data.Records}
 
