@@ -90,8 +90,8 @@ export const Bar = () =>
     return  <Svg width={SVG_Width} height={SVG_Height + Text_FontSize}>
                 <G width={Graph_Width} height={Graph_Height}
                     transform={`translate(${Margin}, ${Margin})`}>
-                    {Grid_Lines}
-                    {Vertical_Bars}
+                    <G>{Grid_Lines}</G>
+                    <G>{Vertical_Bars}</G>
                 </G>
             </Svg>
 }
