@@ -5,6 +5,9 @@ import { Use_Context, Create_Context } from '@/scripts/hook/context';
 import {Dimensions} from 'react-native';
 import { arc, ascending, pie } from 'd3';
 
+const SVG_Width = Dimensions.get('window').width
+const SVG_Height = Dimensions.get('window').height / 2
+
 const Pie = () => 
 {
     const Radius = 7.7
@@ -44,7 +47,8 @@ const Pie = () =>
                 </G>
     })
 
-    return  <Svg height="1000" width="1000" viewBox='0 0 50 50'>
+    const ViewBox = `0 0 ${SVG_Width / 20} ${SVG_Height / 20}`
+    return  <Svg height={SVG_Height} width={SVG_Width} viewBox={ViewBox}>
                 <G transform={`translate(${Phone_Width / 40}, ${10})`}>
                     {Pie ? Pie_Graph : null}
                 </G>
