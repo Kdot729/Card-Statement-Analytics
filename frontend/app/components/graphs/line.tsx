@@ -60,24 +60,29 @@ export const LineGraph = () =>
         {
             const Dimension = 7
             const Y_Scale_Number = Amount + Cumulative_Sum
-            const Y_Coordinate = Y_Scale(Y_Scale_Number) - 1
+            let Y_Coordinate = Y_Scale(Y_Scale_Number)
 
+            //Note If the rectangle is below 0 on the axis move the rectangle down (postive number), otherwise move it up (negative number)
+            const Adjust_Rectangle = Y_Coordinate < Y_Scale(0) ? -2: 0.75
+
+            Y_Coordinate += Adjust_Rectangle
             Cumulative_Sum = Y_Scale_Number
+
             return <Rect key={index} x={Value["Rectangle X"]} y={Y_Coordinate} fill={Color}
                 width={Dimension} height={Dimension}/>
         })
 
         return <G key={index}>{Grouped_Rectangles}</G>
-    }) : []
+    }) : null
 
     return  <Svg width={SVG_Width} height={SVG_Height + 15}>
                 <G width={Graph_Width} height={Graph_Height}
                 transform={Transform}>
                     <Path d={Line_Path} opacity={1}
                         stroke="rgb(0, 0, 0)" fill="none" strokeWidth={2}/>
-                    {Rectangles}
-                    {X_Axis}
-                    {Y_Axis}
+                    <G>{Rectangles}</G>
+                    <G>{X_Axis}</G>
+                    <G>{Y_Axis}</G>
                 </G>
             </Svg>
 }
