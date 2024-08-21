@@ -2,18 +2,16 @@ import React from 'react'
 import Svg, { Path, G, Text } from "react-native-svg"
 import { useFetch } from '@/scripts/fetch';
 import { Use_Context, Create_Context } from '@/scripts/hook/context';
-import {Dimensions} from 'react-native';
 import { arc, ascending, pie } from 'd3';
-
-const SVG_Width = Dimensions.get('window').width
-const SVG_Height = Dimensions.get('window').height / 2
+import { Calculate_Dimensions } from '@/scripts/graph';
 
 const Pie = () => 
 {
+    const {SVG_Width, SVG_Height} = Calculate_Dimensions(0, 0, 2)
+    
     const Radius = 7.7
     const PDF_ID = Use_Context(Create_Context)
     const {Pie} = useFetch("get/pie/PDF", PDF_ID)
-    const Phone_Width = Dimensions.get('window').width
     
     const Pie_Generator = pie().value((Transaction) => {return Transaction.Amount}).sort(ascending)
 
@@ -49,7 +47,7 @@ const Pie = () =>
 
     const ViewBox = `0 0 ${SVG_Width / 20} ${SVG_Height / 20}`
     return  <Svg height={SVG_Height} width={SVG_Width} viewBox={ViewBox}>
-                <G transform={`translate(${Phone_Width / 40}, ${10})`}>
+                <G transform={`translate(${SVG_Width / 40}, ${10})`}>
                     {Pie ? Pie_Graph : null}
                 </G>
             </Svg>

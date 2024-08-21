@@ -1,23 +1,17 @@
 import React from 'react'
 import Svg, { G, Text, Rect } from "react-native-svg"
-import { Dimensions } from 'react-native'
 import { extent, interpolatePuBu, scaleSequential} from 'd3'
 import { useFetch } from '@/scripts/fetch'
 import { Use_Context, Create_Context } from '@/scripts/hook/context'
-
-const Margin = 5
-const SVG_Width = Dimensions.get('window').width - 25
-const SVG_Height = Dimensions.get('window').height / 2.3
-
-const Double_Margin = Margin * 2
-const Graph_Width = SVG_Width - Double_Margin
-const Graph_Height = SVG_Height - Double_Margin
-const Dimension = (Graph_Width * Graph_Height) / 2971.4217
+import { Calculate_Dimensions } from '@/scripts/graph'
 
 export const Heatmap = () => 
 {
     const PDF_ID = Use_Context(Create_Context)
     const {Heatmap} = useFetch("get/heatmap/PDF", PDF_ID)
+
+    const {SVG_Width, SVG_Height, Margin, Graph_Width, Graph_Height} = Calculate_Dimensions(5, 25, 2.3)
+    const Dimension = (Graph_Width * Graph_Height) / 2971.4217
 
     const Day_of_Weeks = []
     const Months = []

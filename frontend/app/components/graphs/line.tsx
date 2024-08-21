@@ -1,19 +1,13 @@
 import React from 'react'
 import Svg, { G, Path, Line, Text, Rect } from "react-native-svg"
-import { Dimensions } from 'react-native'
 import { line, extent, scaleLinear, scaleTime, timeFormat, } from 'd3'
 import { useFetch } from '@/scripts/fetch'
 import { Use_Context, Create_Context } from '@/scripts/hook/context'
 import { Calculate_Linear_Domain } from '@/scripts/axis'
+import { Calculate_Dimensions } from '@/scripts/graph'
 
-const Margin = 5
-const SVG_Width = Dimensions.get('window').width - 25
-const SVG_Height = Dimensions.get('window').height / 2
-
+const {SVG_Width, SVG_Height, Margin, Graph_Width, Graph_Height} = Calculate_Dimensions(5, 25, 2)
 const Adjusted_X_Coordinate = 40 + Margin
-const Double_Margin = Margin * 2
-const Graph_Width = SVG_Width - Double_Margin
-const Graph_Height = SVG_Height - Double_Margin
 
 export const LineGraph = () => 
 {

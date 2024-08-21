@@ -1,9 +1,9 @@
 import { Calculate_Linear_Domain } from '@/scripts/axis'
 import { useFetch } from '@/scripts/fetch'
+import { Calculate_Dimensions } from '@/scripts/graph'
 import { Use_Context, Create_Context } from '@/scripts/hook/context'
 import { scaleBand, scaleLinear } from 'd3'
 import React from 'react'
-import { Dimensions } from 'react-native'
 import Svg, { G, Text, Rect, Line } from "react-native-svg"
 
 export const Bar = () => 
@@ -11,15 +11,7 @@ export const Bar = () =>
     const PDF_ID = Use_Context(Create_Context)
     const {Bar} = useFetch("get/bar/PDF", PDF_ID)
 
-    const SVG_Width = Dimensions.get('window').width
-    const SVG_Height = Dimensions.get('window').height / 2
-
-    const Margin = 7
-    const Double_Margin = Margin * 2
-
-    const Graph_Width = SVG_Width - Double_Margin
-    const Graph_Height = SVG_Height - Double_Margin
-
+    const {SVG_Width, SVG_Height, Margin, Graph_Width, Graph_Height} = Calculate_Dimensions(7, 0, 2)
     const Text_FontSize = 12
 
     const Bar_Categories = Bar ? Bar.sort((First_Element, Second_Element) => 
